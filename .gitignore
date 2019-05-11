@@ -1,0 +1,7 @@
+elpa/
+auto-save-list/
+backups/
+.cache/
+.recentf
+.smex-items
+projectile-bookmarks.eld
