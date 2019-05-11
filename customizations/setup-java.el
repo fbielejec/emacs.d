@@ -24,7 +24,10 @@
 (use-package hydra :ensure t)
 (use-package company-lsp :ensure t)
 (use-package lsp-ui :ensure t)
-(use-package lsp-java :ensure t :after lsp
+
+(use-package lsp-java
+  :ensure t
+  :after lsp
   :config (add-hook 'java-mode-hook 'lsp))
 
 (use-package dap-mode
@@ -40,14 +43,13 @@
 ;;   (add-hook 'before-save-hook 'whitespace-cleanup))
 
 ;; add lombok support
+;; https://projectlombok.org/
 (setq lsp-java-vmargs '("-noverify"
                         "-Xmx1G"
                         "-XX:+UseG1GC"
                         "-XX:+UseStringDeduplication"
                         "-javaagent:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"
                         "-Xbootclasspath/a:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"))
-
-;; "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:/Users/david/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar -Xbootclasspath/a:/Users/david/.m2/repository/org/projectlombok/lombok/1.16.20/lombok-1.16.20.jar"
 
 (add-hook 'java-mode-hook
           (lambda () (add-hook 'before-save-hook 'whitespace-cleanup nil 'local)))

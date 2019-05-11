@@ -26,7 +26,6 @@
 ;;    (setq hl-paren-background-colors '("orangered4"))
 ;;    (setq hl-paren-colors '("black")))
 
-
 ;; Highlight current line
 (global-hl-line-mode 1)
 
