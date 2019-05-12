@@ -94,6 +94,9 @@
 
     ;; Solidity editing
     solidity-mode
+
+    ;; syntax checking extension
+    flycheck
     ))
 
 (dolist (p my-packages)

@@ -5,4 +5,5 @@ backups/
 .recentf
 .smex-items
 ido.last
+.dap-breakpoints
 projectile-bookmarks.eld
