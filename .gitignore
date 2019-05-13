@@ -2,8 +2,10 @@ elpa/
 auto-save-list/
 backups/
 .cache/
+transient/
 .recentf
 .smex-items
 ido.last
 .dap-breakpoints
 projectile-bookmarks.eld
+cider-history

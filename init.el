@@ -8,9 +8,8 @@
 (setq package-archives '(
                          
                          ("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")
-                         ;; ("melpa" . "http://melpa.milkbox.net/packages/")
-                         ;; ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+                         ;; ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
 
                          ))
 
@@ -180,7 +179,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors magit ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking cider))))
+    (magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
