@@ -5,13 +5,19 @@
 ;; Define package repositories
 (require 'package)
 
-(setq package-archives '(
-                         
-                         ("gnu" . "https://elpa.gnu.org/packages/")
-                         ;; ("melpa" . "https://melpa.org/packages/")
-                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-
-                         ))
+(setq package-archives
+      '(
+        ("GNU ELPA"     . "https://elpa.gnu.org/packages/")
+        ("MELPA Stable" . "https://stable.melpa.org/packages/")
+        ("MELPA"        . "https://melpa.org/packages/")
+        )
+      ;; higher number is preffered
+      package-archive-priorities
+      '(
+        ("GNU ELPA"     . 5)
+        ("MELPA Stable" . 10)
+        ("MELPA"        . 0)
+        ))
 
 
 ;; Load and activate emacs packages. Do this first so that the
@@ -49,7 +55,7 @@
     ;; of ido
     ;; ido-ubiquitous
     ido-completing-read+
-    
+
     ;; Enhances M-x to allow easier execution of commands. Provides
     ;; a filterable list of possible commands in the minibuffer
     ;; http://www.emacswiki.org/emacs/Smex
@@ -96,6 +102,9 @@
 
     ;; syntax checking extension
     flycheck
+
+    ;; better searching w/ helm-projectile-grep
+    helm-projectile
     ))
 
 (dolist (p my-packages)
@@ -150,27 +159,6 @@
 (load "setup-java.el")
 (load "setup-solidity.el")
 
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(ansi-color-faces-vector
-;;    [default bold shadow italic underline bold bold-italic bold])
-;;  '(coffee-tab-width 2)
-;;  '(custom-safe-themes
-;;    (quote
-;;     ("5ee12d8250b0952deefc88814cf0672327d7ee70b16344372db9460e9a0e3ffc" "9e54a6ac0051987b4296e9276eecc5dfb67fdcd620191ee553f40a9b6d943e78" default)))
-;;  '(fci-rule-color "#2a2a2a")
-;;  '(package-selected-packages
-;;    (quote
-;;     (highlight dockerfile-mode dash treemacs lsp-java cider clojure-mode sesman highlight-parentheses multiple-cursors ess ag yaml-mode use-package tagedit solidity-mode smex skewer-mode rjsx-mode rainbow-delimiters projectile paredit markdown-mode magit json-mode inf-clojure ido-ubiquitous git-commit-mode flycheck exec-path-from-shell clojure-mode-extra-font-locking buffer-move aggressive-indent))))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -179,7 +167,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
+    (helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
