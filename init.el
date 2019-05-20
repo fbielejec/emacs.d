@@ -73,9 +73,6 @@
     ;; git integration
     magit
 
-    ;; figwheel-repl
-    ;; inf-clojure
-
     ;; declare and configure packages macro
     use-package
 
@@ -108,6 +105,9 @@
 
     ;; better searching w/ helm-projectile-grep
     helm-projectile
+
+    ;; buf-move-(left/right)
+    buffer-move
     ))
 
 (dolist (p my-packages)
@@ -158,7 +158,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
+    (buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
