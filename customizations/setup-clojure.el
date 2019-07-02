@@ -52,7 +52,8 @@
   (rfn 2)
   (let-routes 1)
   (context 2)
-  (wait-for 'defun))
+  (wait-for 'defun)
+  (animation/start 2))
 
 ;;;;
 ;; Cider
