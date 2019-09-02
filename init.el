@@ -108,6 +108,11 @@
 
     ;; buf-move-(left/right)
     buffer-move
+
+    ;; for rust editing
+    racer
+    company
+    rust-mode
     ))
 
 (dolist (p my-packages)
@@ -149,6 +154,7 @@
 (load "setup-js.el")
 (load "setup-java.el")
 (load "setup-solidity.el")
+(load "setup-rust.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -158,7 +164,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
+    (racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
