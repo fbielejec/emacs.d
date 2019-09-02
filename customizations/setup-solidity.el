@@ -8,3 +8,7 @@
 (use-package flycheck
   :ensure t
   :init (solidity-mode))
+
+;; remove whitespace on save
+(when (eq major-mode 'solidity-mode)
+  (add-hook 'before-save-hook 'whitespace-cleanup))
