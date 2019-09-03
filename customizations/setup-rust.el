@@ -17,3 +17,8 @@
 (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
 (setq company-tooltip-align-annotations t)
 
+(defun rust-save-hook()
+  (when (eq major-mode 'rust-mode)
+    (whitespace-cleanup)))
+
+(add-hook 'before-save-hook 'rust-save-hook)
