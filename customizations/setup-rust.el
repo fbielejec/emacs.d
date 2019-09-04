@@ -1,3 +1,4 @@
+(require 'use-package)
 (add-to-list 'auto-mode-alist '("\\.rs$" . rust-mode))
 
 (defun rust-save-hook()
@@ -13,10 +14,10 @@
                       "/lib/rustlib/src/rust/src"))
 
   :config
+  (add-hook 'rust-mode-hook 'enable-paredit-mode)
+  (add-hook 'before-save-hook 'rust-save-hook)
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode)
   (add-hook 'racer-mode-hook #'company-mode)
   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  (add-hook 'rust-mode-hook 'enable-paredit-mode)
-  (setq company-tooltip-align-annotations t)
-  (add-hook 'before-save-hook 'rust-save-hook))
+  (setq company-tooltip-align-annotations t))
