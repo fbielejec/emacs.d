@@ -53,7 +53,8 @@
   (let-routes 1)
   (context 2)
   (wait-for 'defun)
-  (animation/start 2))
+  (animation/start 0)
+  (animation/parallel 0))
 
 ;;;;
 ;; Cider
