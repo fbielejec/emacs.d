@@ -52,6 +52,7 @@
   (rfn 2)
   (let-routes 1)
   (context 2)
+  (defrecord+ '(2 nil nil (1)))
   (wait-for 'defun)
   (animation/start 0)
   (animation/parallel 0))
