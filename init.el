@@ -120,6 +120,14 @@
     (package-install p)))
 
 ;;;;
+;; Package specific config
+;;;;
+
+;; from use-package documentation
+(eval-when-compile
+  (require 'use-package))
+
+;;;;
 ;; Customization
 ;;;;
 
@@ -155,19 +163,3 @@
 (load "setup-java.el")
 (load "setup-solidity.el")
 (load "setup-rust.el")
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(package-selected-packages
-   (quote
-    (racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

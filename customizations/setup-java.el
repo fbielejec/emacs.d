@@ -7,15 +7,17 @@
 
 (require 'cc-mode)
 
-(condition-case nil
-    (require 'use-package)
-  (file-error
-   (require 'package)
-   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-   (package-initialize)
-   (package-refresh-contents)
-   (package-install 'use-package)
-   (require 'use-package)))
+;; (condition-case nil
+;;     (require 'use-package)
+;;   (file-error
+;;    (require 'package)
+;;    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;;    (package-initialize)
+;;    (package-refresh-contents)
+;;    (package-install 'use-package)
+;;    (require 'use-package)))
+
+(require 'use-package)
 
 (use-package projectile :ensure t)
 (use-package treemacs :ensure t)
