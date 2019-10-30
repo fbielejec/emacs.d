@@ -24,6 +24,14 @@ a link you can paste in the browser."
                        (count-lines 1 (point)))))
     (kill-new link)))
 
+;; (defun push-to-mac ()
+;;  (interactive)
+;;  (magit-commit-extend)
+;;  (let ((current-branch (magit-get-current-branch)))
+;;    (magit-git-push current-branch
+;;                    (concat "mac/" current-branch)
+;;                    (list "--force"))))
+
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")

@@ -22,7 +22,7 @@
 ;; (use-package highlight-parentheses
 ;;    :ensure t
 ;;    :pin melpa
-;;    :config 
+;;    :config
 ;;    (setq hl-paren-background-colors '("orangered4"))
 ;;    (setq hl-paren-colors '("black")))
 
@@ -101,7 +101,7 @@
           (message "Deleted file %s" filename)
           (kill-buffer))))))
 
-;; (global-set-key (kbd "C-c D") 'delete-file-and-buffer) 
+;; (global-set-key (kbd "C-c D") 'delete-file-and-buffer)
 
 ;; multiple cursors
 (require 'multiple-cursors)
@@ -117,3 +117,9 @@
 ;; enable disabled commands permanently
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-." . er/expand-region)
+  ("C-," . er/contract-region))
