@@ -163,3 +163,30 @@
 (load "setup-java.el")
 (load "setup-solidity.el")
 (load "setup-rust.el")
+(load "setup-ess.el")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(package-selected-packages
+   (quote
+    (ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
+ '(safe-local-variable-values
+   (quote
+    ((eval define-clojure-indent
+           (animation/interpolate 0)
+           (animation/start 0)
+           (animation/parallel 0))
+     (eval define-clojure-indent
+           (animation/start 0)
+           (animation/parallel 0))
+     (cider-shadow-cljs-default-options . "app")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
