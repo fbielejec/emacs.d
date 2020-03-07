@@ -50,6 +50,10 @@
     ;; https://github.com/clojure-emacs/cider
     cider
 
+    ;; refactoring support for Clojure projects
+    ;; https://github.com/clojure-emacs/clj-refactor.el
+    clj-refactor
+
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
     ;; of ido
@@ -173,7 +177,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
+    (clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
  '(safe-local-variable-values
    (quote
     ((eval define-clojure-indent
