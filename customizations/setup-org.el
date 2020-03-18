@@ -54,3 +54,19 @@
                    ((org-agenda-skip-function
                      '(or (air-org-skip-subtree-if-priority ?A)
                           (org-agenda-skip-if nil '(scheduled deadline))))))))))
+
+;; integrate plantuml [diagrams] support
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(;; other Babel languages
+   (plantuml . t)))
+
+;; <dependency>
+;;     <groupId>net.sourceforge.plantuml</groupId>
+;;     <artifactId>plantuml</artifactId>
+;;     <version>6703</version>
+;; </dependency>
+;; sudo apt-get install graphviz
+
+(setq org-plantuml-jar-path
+      (expand-file-name "/home/filip/.m2/repository/net/sourceforge/plantuml/plantuml/6703/plantuml-6703.jar"))

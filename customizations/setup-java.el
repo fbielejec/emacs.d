@@ -51,8 +51,8 @@
                         "-Xmx1G"
                         "-XX:+UseG1GC"
                         "-XX:+UseStringDeduplication"
-                        "-javaagent:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"
-                        "-Xbootclasspath/a:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.6/lombok-1.18.6.jar"))
+                        "-javaagent:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"
+                        "-Xbootclasspath/a:/home/filip/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"))
 
 (add-hook 'java-mode-hook
           (lambda () (add-hook 'before-save-hook 'whitespace-cleanup nil 'local)))
