@@ -64,9 +64,9 @@
 ;; <dependency>
 ;;     <groupId>net.sourceforge.plantuml</groupId>
 ;;     <artifactId>plantuml</artifactId>
-;;     <version>6703</version>
+;;     <version>1.2020.3</version>
 ;; </dependency>
 ;; sudo apt-get install graphviz
 
 (setq org-plantuml-jar-path
-      (expand-file-name "/home/filip/.m2/repository/net/sourceforge/plantuml/plantuml/6703/plantuml-6703.jar"))
+      (expand-file-name "/home/filip/.m2/repository/net/sourceforge/plantuml/plantuml/6703/plantuml.1.2020.3.jar"))
