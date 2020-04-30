@@ -6,7 +6,7 @@
 
 ;; Fantasque Sans Mono font (install from repos)
 ;; (set-frame-font "Fantasque Sans Mono-10" nil t)
-(set-frame-font (font-spec :name "Fira Mono Medium-9" :width 'normal :height 100))
+(set-frame-font (font-spec :name "Fira Mono Medium-8" :width 'normal :height 100))
 ;; increase font size for better readability
 ;; (set-face-attribute 'default nil :height 100)
 

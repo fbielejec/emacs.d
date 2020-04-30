@@ -11,3 +11,8 @@
 ;; shell scripts indentation
 (setq-default sh-basic-offset 2)
 (setq-default sh-indentation 2)
+
+;; get SSH agent in magit, don't ask for passw every time
+(require 'exec-path-from-shell)
+(exec-path-from-shell-copy-env "SSH_AGENT_PID")
+(exec-path-from-shell-copy-env "SSH_AUTH_SOCK")

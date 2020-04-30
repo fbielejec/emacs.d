@@ -11,3 +11,7 @@ ido.last
 projectile-bookmarks.eld
 projectile.cache
 transient/
+.lsp-session-v1
+abbrev_defs
+eclipse.jdt.ls/
+workspace/
