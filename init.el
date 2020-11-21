@@ -101,11 +101,13 @@
     ;; Java in emacs
     lsp-java
 
+    ;; lsp-java-treemacs
+
     ;; Solidity editing
     solidity-mode
 
     ;; syntax checking extension
-    flycheck
+    ;; flycheck
 
     ;; better searching w/ helm-projectile-grep
     helm-projectile
@@ -130,6 +132,16 @@
 ;; from use-package documentation
 (eval-when-compile
   (require 'use-package))
+
+;; make sure flycheck comes from Melpa (for lsp-java)
+(when (>= emacs-major-version 24)
+  ;; syntax checking extension
+  (require 'flycheck)
+  (add-to-list
+   'package-archives
+   ;; '("melpa" . "http://stable.melpa.org/packages/") ; many packages won't show if using stable
+   '("melpa" . "https://melpa.org/packages/")
+   t))
 
 ;;;;
 ;; Customization
@@ -170,6 +182,7 @@
 (load "setup-solidity.el")
 (load "setup-rust.el")
 (load "setup-ess.el")
+(load "setup-python.el")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -179,7 +192,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider flycheck dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
+    (helm-lsp lsp-treemacs which-key elpy ein kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
  '(safe-local-variable-values
    (quote
     ((eval define-clojure-indent

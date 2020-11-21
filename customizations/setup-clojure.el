@@ -55,7 +55,8 @@
   (defrecord+ '(2 nil nil (1)))
   (wait-for 'defun)
   (animation/start 0)
-  (animation/parallel 0))
+  (animation/parallel 0)
+  (gobj/extend 2))
 
 ;;;;
 ;; Cider

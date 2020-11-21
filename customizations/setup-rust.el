@@ -41,7 +41,7 @@
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
 ;; syntax checks (enable with M+x flycheck-mode)
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;; autocomplete with company
 (add-hook 'racer-mode-hook #'company-mode)
@@ -50,8 +50,8 @@
 
 ;; TODO : TESTING THESE MODES
 
-;; (use-package flycheck
-;;   :hook (rust-mode . flycheck-mode))
+(use-package flycheck
+  :hook (rust-mode . flycheck-mode))
 
 ;; (use-package company
 ;;   :hook (rust-mode . company-mode)
