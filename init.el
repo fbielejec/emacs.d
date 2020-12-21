@@ -192,7 +192,7 @@
  '(coffee-tab-width 2)
  '(package-selected-packages
    (quote
-    (helm-lsp lsp-treemacs which-key elpy ein kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
+    (flycheck helm-lsp lsp-treemacs which-key ein elpy kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
  '(safe-local-variable-values
    (quote
     ((eval define-clojure-indent
