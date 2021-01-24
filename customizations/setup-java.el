@@ -4,39 +4,14 @@
 
 ;; --- CONF 2 --- ;;
 
-;; (condition-case nil
-;;     (require 'use-package)
-;;   (file-error
-;;    (require 'package)
-;;    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-;;    (package-initialize)
-;;    (package-refresh-contents)
-;;    (package-install 'use-package)
-;;    (setq use-package-always-ensure t)
-;;    (require 'use-package)))
-
 (use-package projectile)
-
 (use-package flycheck)
-;; (use-package flycheck :ensure t :init (global-flycheck-mode))
-;; (use-package flycheck :ensure t)
-
-(use-package yasnippet :config (yas-global-mode))
+(use-package yasnippet :config (yas-global-mode))g
 (use-package lsp-mode :hook ((lsp-mode . lsp-enable-which-key-integration))
   :config (setq lsp-completion-enable-additional-text-edit nil))
 (use-package hydra)
 (use-package company)
-
-;; (use-package lsp-ui)
-(use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
-  :config
-  (setq lsp-ui-sideline-enable t
-	lsp-ui-sideline-show-symbol t
-	lsp-ui-sideline-show-hover t
-	lsp-ui-sideline-showcode-actions t
-	lsp-ui-sideline-update-mode 'point))
-
+(use-package lsp-ui)
 (use-package which-key :config (which-key-mode))
 (use-package lsp-java :config (add-hook 'java-mode-hook 'lsp))
 (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
@@ -141,9 +116,18 @@
 ;; (when (eq major-mode 'java-mode)
 ;;   (add-hook 'before-save-hook 'whitespace-cleanup))
 
+;; (use-package dap-mode :after lsp-mode :config (dap-auto-configure-mode))
+;; (use-package dap-java :ensure nil)
+(use-package helm-lsp)
+(use-package helm
+  :config (helm-mode))
+;; (use-package lsp-treemacs)
+
+
 ;; --- CONFIG EXTRAS --- ;;
 
-(setq lsp-java-java-path "/usr/lib/jvm/java-11-oracle/bin/java")
+;; (setq lsp-java-java-path "/usr/lib/jvm/java-11-oracle/bin/java")
+(setq lsp-java-java-path "/usr/bin/java")
 
 ;; add lombok support
 (setq lombok-version "1.18.16")
