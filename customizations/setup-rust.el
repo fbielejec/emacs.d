@@ -40,9 +40,6 @@
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
-;; syntax checks (enable with M+x flycheck-mode)
-;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-
 ;; autocomplete with company
 (add-hook 'racer-mode-hook #'company-mode)
 (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
@@ -50,8 +47,14 @@
 
 ;; TODO : TESTING THESE MODES
 
-(use-package flycheck
-  :hook (rust-mode . flycheck-mode))
+;; syntax checks (enable with M+x flycheck-mode)
+;; (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+
+;; (use-package flycheck
+;;   :hook (rust-mode . flycheck-mode))
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;; (use-package company
 ;;   :hook (rust-mode . company-mode)
