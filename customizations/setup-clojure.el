@@ -34,8 +34,11 @@
 
 (add-hook 'before-save-hook 'clojure-save-hook)
 
-;; to emulate cursive indents in cider-mode
 ;; (setq clojure-indent-style :always-indent)
+(setq clojure-indent-style 'align-arguments)
+(setq clojure-align-forms-automatically t)
+
+;; to emulate cursive indents in cider-mode
 ;; list of macros and indentation rules, see
 ;; https://github.com/clojure-emacs/clojure-mode#indentation-options
 (require 'clojure-mode)
