@@ -5,10 +5,9 @@
 ;; preferences
 
 ;; Fantasque Sans Mono font (install from repos)
-;; (set-frame-font "Fantasque Sans Mono-10" nil t)
-(set-frame-font (font-spec :name "Fira Mono Medium-10" :width 'normal :height 100))
-;; increase font size for better readability
-;; (set-face-attribute 'default nil :height 100)
+;; (set-frame-font (font-spec :name "Fantasque Sans Mono-10" :width 'normal :height 100))
+;; (set-frame-font (font-spec :name "Fira Mono Medium-10" :width 'normal :height 100))
+(set-frame-font (font-spec :name "Fira Mono Medium-6" :width 'normal :height 100))
 
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
