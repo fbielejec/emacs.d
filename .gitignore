@@ -1,6 +1,7 @@
 *.tar.gz
 .cache/
 .dap-breakpoints
+.extension/
 .lsp-session-v1
 .mc-lists.el
 .recentf
