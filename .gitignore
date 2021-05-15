@@ -14,10 +14,12 @@ cider-history
 eclipse.jdt.ls/
 elpa/
 elpy/
+eshell/
 ido.last
 ido.last~
 projectile-bookmarks.eld
 projectile.cache
+projects
 request/
 transient/
 url/

@@ -19,7 +19,7 @@
               ("C-c C-c h" . lsp-ui-doc-glance))
   :config
   ;; uncomment for less flashiness
-  ;; (setq lsp-eldoc-hook nil)
+  (setq lsp-eldoc-hook nil)
   ;; (setq lsp-enable-symbol-highlighting nil)
   ;; (setq lsp-signature-auto-activate nil)
 

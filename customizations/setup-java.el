@@ -143,22 +143,41 @@
          :port 5005))
   )
 
-(use-package dap-java
-  :ensure nil
-  :after (lsp-java)
+;; (use-package dap-java
+;;   :ensure nil
+;;   :after (lsp-java)
 
-  ;; The :bind here makes use-package fail to lead the dap-java block!
-  ;; :bind
-  ;; (("C-c R" . dap-java-run-test-class)
-  ;;  ("C-c d" . dap-java-debug-test-method)
-  ;;  ("C-c r" . dap-java-run-test-method)
-  ;;  )
+;;   ;; The :bind here makes use-package fail to lead the dap-java block!
+;;   ;; :bind
+;;   ;; (("C-c R" . dap-java-run-test-class)
+;;   ;;  ("C-c d" . dap-java-debug-test-method)
+;;   ;;  ("C-c r" . dap-java-run-test-method)
+;;   ;;  )
 
+;;   :config
+;;   (global-set-key (kbd "<f7>") 'dap-step-in)
+;;   (global-set-key (kbd "<f8>") 'dap-next)
+;;   (global-set-key (kbd "<f9>") 'dap-continue)
+;;   )
+
+
+;; Dap-mode for debugger
+;; Dap-hydra shows keys you can use to enable various options and jump through code at runtime
+(use-package dap-mode
+  :ensure t
+  :after (lsp-mode)
+  :functions dap-hydra/nil
   :config
-  (global-set-key (kbd "<f7>") 'dap-step-in)
-  (global-set-key (kbd "<f8>") 'dap-next)
-  (global-set-key (kbd "<f9>") 'dap-continue)
-  )
+  (require 'dap-java)
+  :bind (:map lsp-mode-map
+              ("<f5>" . dap-debug)
+              ("M-<f5>" . dap-hydra))
+  :hook ((dap-mode . dap-ui-mode)
+         (dap-session-created . (lambda (&_rest) (dap-hydra)))
+         (dap-terminated . (lambda (&_rest) (dap-hydra/nil)))))
+
+;; ensure dap-java is installed too
+(use-package dap-java :ensure nil)
 
 (use-package treemacs
   :init
