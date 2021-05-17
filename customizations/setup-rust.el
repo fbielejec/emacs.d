@@ -141,9 +141,10 @@
      (list :type "lldb"
            :request "launch"
            :name "LLDB::Run"
-	   :gdbpath "rust-lldb"
+           :gdbpath "rust-lldb"
            ;; uncomment if lldb-mi is not in PATH
            ;; :lldbmipath "path/to/lldb-mi"
+           :lldbmipath "/usr/local/bin/lldb-mi"
            ))))
 
 (add-to-list 'auto-mode-alist '("\\.rs$" . rustic-mode))

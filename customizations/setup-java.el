@@ -29,7 +29,7 @@
 (use-package idle-highlight-mode)
 
 (defun my-java-mode-hook ()
-  (auto-fill-mode)
+  ;; (auto-fill-mode)
   (flycheck-mode)
   (git-gutter+-mode)
   (gtags-mode)
