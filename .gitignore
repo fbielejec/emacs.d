@@ -12,6 +12,7 @@ auto-save-list/
 backups/
 cider-history
 eclipse.jdt.ls/
+eln-cache/
 elpa/
 elpy/
 eshell/

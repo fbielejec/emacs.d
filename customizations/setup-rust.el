@@ -125,6 +125,7 @@
   :ensure
   :init (exec-path-from-shell-initialize))
 
+;; TODO : WIP
 (when (executable-find "lldb-mi")
   (use-package dap-mode
     :ensure

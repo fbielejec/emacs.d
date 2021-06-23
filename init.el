@@ -8,7 +8,7 @@
 
 (add-hook 'emacs-startup-hook
   (lambda ()
-    (setq gc-cons-threshold 300000000 ; 300mb	
+    (setq gc-cons-threshold 300000000 ; 300mb
           gc-cons-percentage 0.1)))
 
 ;;;;
@@ -160,6 +160,9 @@
 ;; Customization
 ;;;;
 
+;; disable showing hunderds of native comp errprs nasty
+(setq warning-minimum-level :error)
+
 ;; Add a directory to our load path so that when you `load` things
 ;; below, Emacs knows where to look for the corresponding file.
 (add-to-list 'load-path "~/.emacs.d/customizations")
@@ -204,14 +207,11 @@
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
  '(custom-safe-themes
-   (quote
-    ("6b2c6e5bc1e89cf7d927d17f436626eac98a04fdab89e080f4e193f6d291c93d" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" default)))
+   '("6b2c6e5bc1e89cf7d927d17f436626eac98a04fdab89e080f4e193f6d291c93d" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" default))
  '(package-selected-packages
-   (quote
-    (rustic command-log-mode idle-highlight-mode ron-mode helm-ag gruvbox-theme protobuf-mode helm-lsp lsp-treemacs which-key elpy ein kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking)))
+   '(clojure-mode with-editor rustic command-log-mode idle-highlight-mode ron-mode helm-ag gruvbox-theme protobuf-mode helm-lsp lsp-treemacs which-key elpy ein kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))
  '(safe-local-variable-values
-   (quote
-    ((cider-path-translations
+   '((cider-path-translations
       ("/root" . "/home/filip")
       ("/usr/src/app" . "/home/filip/Dropbox/MobileProjects/clash-backend"))
      (cider-ns-refresh-before-fn . "com.stuartsierra.component.repl/stop")
@@ -225,7 +225,7 @@
      (eval define-clojure-indent
            (animation/start 0)
            (animation/parallel 0))
-     (cider-shadow-cljs-default-options . "app")))))
+     (cider-shadow-cljs-default-options . "app"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
