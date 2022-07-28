@@ -199,33 +199,15 @@
 (load "setup-rust.el")
 (load "setup-ess.el")
 (load "setup-python.el")
-
+(load "setup-wat.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
- '(custom-safe-themes
-   '("6b2c6e5bc1e89cf7d927d17f436626eac98a04fdab89e080f4e193f6d291c93d" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" default))
  '(package-selected-packages
-   '(clojure-mode with-editor rustic command-log-mode idle-highlight-mode ron-mode helm-ag gruvbox-theme protobuf-mode helm-lsp lsp-treemacs which-key elpy ein kotlin-mode flycheck-rust toml-mode clj-refactor ess graphql-mode racer buffer-move helm-projectile yaml-mode magit cider dap-mode lsp-ui company-lsp yasnippet treemacs use-package lsp-java zenburn-theme tagedit smex rjsx-mode rainbow-delimiters projectile paredit multiple-cursors ido-completing-read+ exec-path-from-shell dockerfile-mode clojure-mode-extra-font-locking))
- '(safe-local-variable-values
-   '((cider-path-translations
-      ("/root" . "/home/filip")
-      ("/usr/src/app" . "/home/filip/Dropbox/MobileProjects/clash-backend"))
-     (cider-ns-refresh-before-fn . "com.stuartsierra.component.repl/stop")
-     (cider-ns-refresh-after-fn . "com.stuartsierra.component.repl/start")
-     (cider-known-endpoints
-      ("localhost" "9656"))
-     (eval define-clojure-indent
-           (animation/interpolate 0)
-           (animation/start 0)
-           (animation/parallel 0))
-     (eval define-clojure-indent
-           (animation/start 0)
-           (animation/parallel 0))
-     (cider-shadow-cljs-default-options . "app"))))
+   '(lsp-mode clojure-mode flycheck company-lsp zenburn-theme yaml-mode which-key use-package toml-mode tagedit solidity-mode smex rustic rjsx-mode rainbow-delimiters racer magit-popup magit lsp-ui lsp-java ido-completing-read+ idle-highlight-mode helm-projectile helm-lsp gruvbox-theme ghub flycheck-rust expand-region exec-path-from-shell ein dockerfile-mode company clojure-mode-extra-font-locking clj-refactor buffer-move)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
