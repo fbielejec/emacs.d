@@ -64,7 +64,6 @@
 
 (use-package flycheck :ensure)
 
-
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; auto-completion and code snippets
 

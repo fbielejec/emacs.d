@@ -26,7 +26,7 @@
 
 ;; cycle between these states
 (setq org-todo-keywords
-      '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
+      '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE")))
 
 ;; org files to build the agenda from
 (setq org-agenda-files '("~/Dropbox/"
