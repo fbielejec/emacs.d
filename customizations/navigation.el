@@ -68,7 +68,14 @@
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; navigate opened buffers with arrows 
-(global-set-key (kbd "C-c <left>")  'windmove-left)
-(global-set-key (kbd "C-c <right>") 'windmove-right)
-(global-set-key (kbd "C-c <up>")    'windmove-up)
-(global-set-key (kbd "C-c <down>")  'windmove-down)
+;; (global-set-key (kbd "C-c <left>")  'windmove-left)
+;; (global-set-key (kbd "C-c <right>") 'windmove-right)
+;; (global-set-key (kbd "C-c <up>")    'windmove-up)
+;; (global-set-key (kbd "C-c <down>")  'windmove-down)
+;; use bind keys so that it's never overriden
+;; https://emacs.stackexchange.com/questions/352/how-to-override-major-mode-bindings
+(bind-keys*
+ ("C-c <left>" . windmove-left)
+ ("C-c <right>" . windmove-right)
+ ("C-c <up>" . windmove-up)
+ ("C-c <down>" . windmove-down))
