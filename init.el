@@ -200,6 +200,7 @@
 (load "setup-ess.el")
 (load "setup-python.el")
 (load "setup-wat.el")
+(load "setup-chatgpt.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -207,7 +208,7 @@
  ;; If there is more than one, they won't work right.
  '(coffee-tab-width 2)
  '(package-selected-packages
-   '(lsp-mode clojure-mode flycheck company-lsp zenburn-theme yaml-mode which-key use-package toml-mode tagedit solidity-mode smex rustic rjsx-mode rainbow-delimiters racer magit-popup magit lsp-ui lsp-java ido-completing-read+ idle-highlight-mode helm-projectile helm-lsp gruvbox-theme ghub flycheck-rust expand-region exec-path-from-shell ein dockerfile-mode company clojure-mode-extra-font-locking clj-refactor buffer-move)))
+   '(chatgpt epc ctable concurrent quelpa-use-package quelpa typescript-mode graphql-mode lsp-mode clojure-mode flycheck company-lsp zenburn-theme yaml-mode which-key use-package toml-mode tagedit solidity-mode smex rustic rjsx-mode rainbow-delimiters racer magit-popup magit lsp-ui lsp-java ido-completing-read+ idle-highlight-mode helm-projectile helm-lsp gruvbox-theme ghub flycheck-rust expand-region exec-path-from-shell ein dockerfile-mode company clojure-mode-extra-font-locking clj-refactor buffer-move)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

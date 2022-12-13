@@ -70,3 +70,8 @@
 
 (setq org-plantuml-jar-path
       (expand-file-name "/home/filip/.m2/repository/net/sourceforge/plantuml/plantuml/6703/plantuml.1.2020.3.jar"))
+
+;; setup Maxima Source Code Blocks
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((maxima . t))) ; this line activates maxima
