@@ -1,4 +1,5 @@
 (require 'quelpa-use-package)
+
 (use-package chatgpt
   :quelpa ((chatgpt :fetcher git :url "https://github.com/joshcho/ChatGPT.el.git") :upgrade t)
   :init

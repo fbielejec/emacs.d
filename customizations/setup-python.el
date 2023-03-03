@@ -1,5 +1,6 @@
 (require 'ein)
 
+(setq python-interpreter "/usr/bin/python")
 (setq ein:worksheet-enable-undo t)
 
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
