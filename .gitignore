@@ -27,3 +27,5 @@ request/
 transient/
 url/
 workspace/
+customizations/#ui.el#
+init.el~
