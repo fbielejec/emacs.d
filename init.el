@@ -193,13 +193,13 @@
 ;; Language-specific
 (load "setup-org.el")
 (load "setup-clojure.el")
-(load "setup-js.el")
+;;(load "setup-js.el")
 (load "setup-java.el")
-(load "setup-solidity.el")
+;;(load "setup-solidity.el")
 (load "setup-rust.el")
 (load "setup-ess.el")
 (load "setup-python.el")
-(load "setup-wat.el")
+;;(load "setup-wat.el")
 (load "setup-chatgpt.el")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

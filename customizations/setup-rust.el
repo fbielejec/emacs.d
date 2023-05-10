@@ -48,12 +48,13 @@
   (lsp-idle-delay 0.6)
   (lsp-rust-analyzer-server-display-inlay-hints t)
 
+  (lsp-inlay-hint-enable t)
   (lsp-rust-analyzer-display-chaining-hints t)
   (lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
   (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
   (lsp-rust-analyzer-display-closure-return-type-hints t)
   (lsp-rust-analyzer-display-parameter-hints t)
-  (lsp-rust-analyzer-display-reborrow-hints t)
+  (lsp-rust-analyzer-display-reborrow-hints "always")
 
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))

@@ -6,8 +6,8 @@
 
 ;; Fantasque Sans Mono font (install from repos)
 ;; (set-frame-font (font-spec :name "Fantasque Sans Mono-10" :width 'normal :height 100))
-;; (set-frame-font (font-spec :name "Fira Mono Medium-10" :width 'normal :height 100))
-(set-frame-font (font-spec :name "Fira Mono Medium-6" :width 'normal :height 100))
+(set-frame-font (font-spec :name "Fira Mono Medium-12" :width 'normal :height 100))
+;;(set-frame-font (font-spec :name "Fira Mono Medium-6" :width 'normal :height 100))
 
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
@@ -16,7 +16,8 @@
 (tool-bar-mode -1)
 
 ;; Show line numbers
-(global-linum-mode)
+;;(global-linum-mode)
+(global-display-line-numbers-mode)
 ;; line numbers color
 ;; (set-face-foreground 'linum "#656555")
 
