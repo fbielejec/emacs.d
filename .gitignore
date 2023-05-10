@@ -1,4 +1,5 @@
 *.tar.gz
+!elpa.tar.gz
 .cache/
 .dap-breakpoints
 .extension/
