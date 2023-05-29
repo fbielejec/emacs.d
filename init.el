@@ -191,7 +191,7 @@
 (load "elisp-editing.el")
 
 ;; For saving and restoring buffers
-(load "desktop.el")
+(load "setup-desktop.el")
 
 ;; Language-specific
 (load "setup-org.el")
