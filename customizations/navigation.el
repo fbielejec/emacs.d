@@ -49,7 +49,7 @@
 ;; Shows a list of buffers
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; speed up cursor movement by 10x       
+;; speed up cursor movement by 10x
 (setq auto-window-vscroll nil)
 
 ;; Enhances M-x to allow easier execution of commands. Provides
@@ -67,7 +67,7 @@
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-;; navigate opened buffers with arrows 
+;; navigate opened buffers with arrows
 ;; (global-set-key (kbd "C-c <left>")  'windmove-left)
 ;; (global-set-key (kbd "C-c <right>") 'windmove-right)
 ;; (global-set-key (kbd "C-c <up>")    'windmove-up)
