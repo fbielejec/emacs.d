@@ -190,6 +190,9 @@
 ;; For editing lisps
 (load "elisp-editing.el")
 
+;; For saving and restoring buffers
+(load "setup-desktop.el")
+
 ;; Language-specific
 (load "setup-org.el")
 (load "setup-clojure.el")

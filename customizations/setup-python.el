@@ -1,4 +1,6 @@
 (require 'ein)
+(require 'ein-notebook)
+(require 'ein-subpackages)
 
 (setq python-interpreter "/usr/bin/python")
 (setq ein:worksheet-enable-undo t)
