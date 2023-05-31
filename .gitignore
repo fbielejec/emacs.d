@@ -15,9 +15,11 @@ eclipse.jdt.ls/
 eln-cache/
 elpa/
 elpy/
+emacs.desktop
 eshell/
 ido.last
 ido.last~
+lock
 network-security.data
 projectile-bookmarks.eld
 projectile.cache
