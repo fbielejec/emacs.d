@@ -28,9 +28,10 @@
 (setq org-todo-keywords
       '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE")))
 
-;; org files to build the agenda from
-(setq org-agenda-files '("~/Dropbox/"
-                         "~/Dropbox/district0x/"))
+;; ;; org files to build the agenda from
+(setq org-agenda-files '("~/CloudStation/"
+                         "~/CloudStation/chatka/"
+                         "~/CloudStation/aleph/"))
 
 
 ;; custom agenda view
@@ -69,7 +70,7 @@
 ;; sudo apt-get install graphviz
 
 (setq org-plantuml-jar-path
-      (expand-file-name "/home/filip/.m2/repository/net/sourceforge/plantuml/plantuml/6703/plantuml.1.2020.3.jar"))
+      (expand-file-name "/home/filip/Programs/plantuml-nodot.1.2023.7.jar"))
 
 ;; setup Maxima Source Code Blocks
 (org-babel-do-load-languages
