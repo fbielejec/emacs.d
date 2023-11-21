@@ -16,3 +16,6 @@
 (require 'exec-path-from-shell)
 (exec-path-from-shell-copy-env "SSH_AGENT_PID")
 (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
+
+;; e2e tests
+(setenv "CONTRACTS_NODE" "/home/filip/CloudStation/aleph/membrane-bridge/azero/scripts/azero_contracts_node.sh")

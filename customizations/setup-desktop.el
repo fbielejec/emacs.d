@@ -12,7 +12,7 @@
       desktop-load-locked-desktop nil
       desktop-auto-save-timeout   30)
 
-(desktop-save-mode 1)
+;; (desktop-save-mode 1)
 
 ;; ;; remove desktop after it's been read
 ;; (add-hook 'desktop-after-read-hook
