@@ -129,6 +129,17 @@
 (use-package toml-mode :ensure)
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+;; to fix lsp-find-locations: Symbol’s value as variable is void: xref-auto-jump-to-first-xref
+
+;; (defun my/xref-just-jump-to-first (xrefs alist)
+;;   "However many candidates, just jump to the first."
+;;   (xref-push-marker-stack)
+;;   (xref--pop-to-location (car xrefs) nil))
+
+;; (defun xref-auto-jump-to-first-xref my/xref-just-jump-to-first
+;;   (xref--pop-to-location (car xrefs) nil))
+
+;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; setting up debugging support with dap-mode
 
 (use-package exec-path-from-shell

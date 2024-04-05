@@ -1,6 +1,4 @@
-;;;;
-;; Solidity
-;;;;
+;; V2
 
 (require 'solidity-mode)
 (setq solidity-comment-style 'slash)
@@ -23,7 +21,7 @@
 (when (eq major-mode 'solidity-mode)
   (add-hook 'before-save-hook 'whitespace-cleanup))
 
-;; OLD
+;; V1
 
 ;; (use-package solidity-mode
 ;;   :ensure t
