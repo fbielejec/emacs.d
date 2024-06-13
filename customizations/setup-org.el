@@ -83,34 +83,60 @@
   (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree))
 
 ;; sage
-(require 'ob-sagemath)
-;; Ob-sagemath supports only evaluating with a session.
-(setq org-babel-default-header-args:sage '((:session . t)
-                                           (:results . "output")))
+(org-babel-do-load-languages 'org-babel-load-languages
+  '((C . t)
+    (emacs-lisp . t)
+    (fortran . t)
+    (gnuplot . t)
+    (ipython . t)
+    (latex . t)
+    (ledger . t)
+    (python . t)
+    (maxima . t)
+    (octave . t)
+    (org . t)
+    (R . t)
+    (shell . t)
+))
 
-;; C-c s for asynchronous evaluating (only for SageMath code blocks).
-(with-eval-after-load "org"
-  (define-key org-mode-map (kbd "C-c s") 'ob-sagemath-execute-async))
+;; (setq sage-shell:sage-executable "/usr/bin/sage")
+
+;; (sage-shell:define-alias)
+;; ;; Turn on eldoc-mode
+;; (add-hook 'sage-shell-mode-hook #'eldoc-mode)
+;; (add-hook 'sage-shell:sage-mode-hook #'eldoc-mode)
+
+;; (setq sage-shell:use-prompt-toolkit t)
+;; (setq sage-shell:completion-function 'pcomplete)
+
+;; (require 'ob-sagemath)
+;; ;; Ob-sagemath supports only evaluating with a session.
+;; (setq org-babel-default-header-args:sage '((:session . t)
+;;                                            (:results . "output")))
+
+;; ;; C-c s for asynchronous evaluating (only for SageMath code blocks).
+;; (with-eval-after-load "org"
+;;   (define-key org-mode-map (kbd "C-c s") 'ob-sagemath-execute-async))
 
 ;; Do not confirm before evaluation
 (setq org-confirm-babel-evaluate nil)
 
-;; Do not evaluate code blocks when exporting.
-(setq org-export-babel-evaluate nil)
+;; ;; Do not evaluate code blocks when exporting.
+;; (setq org-export-babel-evaluate nil)
 
-;; Show images when opening a file.
-(setq org-startup-with-inline-images t)
+;; ;; Show images when opening a file.
+;; (setq org-startup-with-inline-images t)
 
-;; Show images after evaluating code blocks.
-(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+;; ;; Show images after evaluating code blocks.
+;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
 
-(eval-after-load "sage-shell-mode"
-  '(sage-shell:define-keys sage-shell-mode-map
-     "C-c C-i"  'helm-sage-complete
-     "C-c C-h"  'helm-sage-describe-object-at-point
-     "M-r"      'helm-sage-command-history
-     "C-c o"    'helm-sage-output-history))
+;; (eval-after-load "sage-shell-mode"
+;;   '(sage-shell:define-keys sage-shell-mode-map
+;;      "C-c C-i"  'helm-sage-complete
+;;      "C-c C-h"  'helm-sage-describe-object-at-point
+;;      "M-r"      'helm-sage-command-history
+;;      "C-c o"    'helm-sage-output-history))
 
-(setq sage-shell:input-history-cache-file "~/.emacs.d/.sage_shell_input_history")
+;; (setq sage-shell:input-history-cache-file "~/.emacs.d/.sage_shell_input_history")
 
-(add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)
+;; (add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)

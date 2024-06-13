@@ -56,6 +56,9 @@
   (lsp-rust-analyzer-display-parameter-hints t)
   (lsp-rust-analyzer-display-reborrow-hints "always")
 
+  ;; compile with all features on
+  (lsp-rust-all-features t)
+
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
