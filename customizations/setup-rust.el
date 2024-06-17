@@ -60,7 +60,11 @@
   (lsp-rust-all-features t)
 
   :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  ;; bump up the chunk-processing threshold to allow for a smoother Emacs experience.
+  (setq read-process-output-max (* 1024 1024)) ;; 1MB
+  (setq lsp-idle-delay 0.5)
+  )
 
 (use-package lsp-ui
   :ensure

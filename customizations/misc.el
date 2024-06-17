@@ -46,3 +46,8 @@ a link you can paste in the browser."
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+;; turn off company for magit (it remaps Tab)
+;; (with-eval-after-load 'magit-mode
+;;   (define-key magit-mode-map (kbd "<C-Tab>") nil))
+(setq company-global-modes '(not magit-mode))

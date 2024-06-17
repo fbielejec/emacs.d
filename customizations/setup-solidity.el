@@ -1,38 +1,71 @@
-;; V2
+;; V3
 
+;; --- Prerequisite for LSP
+;; npm install -g solidity-language-server solc solium
+;; sudo rm -f /usr/bin/node
+;; sudo rm -f /usr/bin/npm
+;; sudo ln -s $(which node) /usr/bin/
+;; sudo ln -s $(which npm) /usr/bin/
+
+;; Enable Solidity mode for .sol files
 (require 'solidity-mode)
-(setq solidity-comment-style 'slash)
-(setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.15.0/bin/solcjs")
-(setq solidity-solium-path "/home/filip/.nvm/versions/node/v18.15.0/bin/solium")
+(add-to-list 'auto-mode-alist '("\\.sol$" . solidity-mode))
 
-(setq flycheck-solidity-solium-soliumrcfile "/home/filip/.soliumrc.json")
+;; Flycheck configuration for Solidity
+(require 'flycheck)
+(add-hook 'solidity-mode-hook 'flycheck-mode)
 
-(define-key solidity-mode-map (kbd "C-c C-g") 'solidity-estimate-gas-at-point)
+;; Company mode configuration
+(require 'company)
+;; (add-hook 'after-init-hook 'global-company-mode)
 
-(require 'solidity-flycheck)
-;; (setq solidity-flycheck-solc-checker-active t)
-(setq solidity-flycheck-solium-checker-active t)
+;; Paredit mode configuration
+(require 'paredit)
+(add-hook 'solidity-mode-hook 'paredit-mode)
 
-;; (setq flycheck-solidity-solc-addstd-contracts t)
+;; Whitespace cleanup on save
+;; (require 'whitespace)
+;; (setq whitespace-style '(face trailing tabs spaces))
 
-(require 'company-solidity)
+;; LSP mode configuration
+(require 'lsp-mode)
+(add-hook 'solidity-mode-hook #'lsp)
 
-;; remove whitespace on save
-(when (eq major-mode 'solidity-mode)
-  (add-hook 'before-save-hook 'whitespace-cleanup))
+;; LSP UI for better user interface
+(require 'lsp-ui)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
 
-;; V1
+;; Local variables
+(defun my-solidity-mode-setup ()
+  "Custom configurations for Solidity mode."
+  (setq-local company-backends '((company-dabbrev-code)))
+  (setq-local flycheck-solidity-solium-soliumrcfile "/home/filip/.soliumrc.json") ; Update this path if you have a solium config file
+  (setq-local flycheck-solidity-solc-addstd-contracts t)
 
-;; (use-package solidity-mode
-;;   :ensure t
-;;   :config
-;;   (setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.15.0/bin/solcjs")
-;;   (setq solidity-solium-path "/home/filip/.nvm/versions/node/v18.15.0/bin/solium")
+  ;; to find npm
+  (setq exec-path (append exec-path '("~/.nvm/versions/node/v18.19.0/bin")))
+  (setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solcjs")
+  (setq solidity-solium-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solium")
 
-;;   (setq solidity-flycheck-solc-checker-active t)
-;;   (setq solidity-flycheck-solium-checker-active t)
+  ;; Whitespace cleanup on save
+  (setq whitespace-style '(face trailing tabs spaces))
+  (add-hook 'before-save-hook 'whitespace-cleanup nil t)
 
-;;   (setq flycheck-solidity-solc-addstd-contracts t)
-;;   (setq flycheck-solidity-solium-soliumrcfile "~/.soliumrc.json")
+  )
 
-;;   (setq solidity-comment-style 'slash))
+(add-hook 'solidity-mode-hook 'my-solidity-mode-setup)
+
+;; Additional configurations (optional)
+;; (setq company-idle-delay 0.2)
+;; (setq company-minimum-prefix-length 1)
+(setq flycheck-check-syntax-automatically '(save mode-enabled))
+
+;; Optional: LSP related settings
+;; (setq lsp-enable-snippet t)
+;; (setq lsp-enable-symbol-highlighting t)
+;; (setq lsp-ui-doc-enable t)
+;; (setq lsp-ui-imenu-enable t)
+;; (setq lsp-ui-sideline-enable t)
+;; (setq lsp-ui-flycheck-enable t)
+
+(provide 'init-solidity)
