@@ -24,14 +24,6 @@ a link you can paste in the browser."
                        (count-lines 1 (point)))))
     (kill-new link)))
 
-;; (defun push-to-mac ()
-;;  (interactive)
-;;  (magit-commit-extend)
-;;  (let ((current-branch (magit-get-current-branch)))
-;;    (magit-git-push current-branch
-;;                    (concat "mac/" current-branch)
-;;                    (list "--force"))))
-
 (defun rename-file-and-buffer (new-name)
   "Renames both current buffer and file it's visiting to NEW-NAME."
   (interactive "sNew name: ")
@@ -48,6 +40,9 @@ a link you can paste in the browser."
           (set-buffer-modified-p nil))))))
 
 ;; turn off company for magit (it remaps Tab)
-;; (with-eval-after-load 'magit-mode
-;;   (define-key magit-mode-map (kbd "<C-Tab>") nil))
-(setq company-global-modes '(not magit-mode))
+
+;; (setq company-global-modes '(not magit-mode))
+;; (setq company-global-modes '(not org-mode))
+
+(add-hook 'org-mode-hook (lambda() (company-mode 0)))
+(add-hook 'magit-mode-hook (lambda() (company-mode 0)))

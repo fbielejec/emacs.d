@@ -30,6 +30,6 @@
 (setq js2-basic-offset 2)
 (setq css-indent-offset 2)
 
-
 ;; add npx to exec-path for cider and shadow-cljs integration 
-(add-to-list 'exec-path "/home/filip/.nvm/versions/node/v11.14.0/bin")
+(add-to-list 'exec-path "/home/filip/.nvm/versions/node/v18.19.0/bin")
+

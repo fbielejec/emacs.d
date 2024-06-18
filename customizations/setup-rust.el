@@ -100,7 +100,14 @@
         ("M->". company-select-last))
   (:map company-mode-map
         ("<tab>". tab-indent-or-complete)
-        ("TAB". tab-indent-or-complete)))
+        ("TAB". tab-indent-or-complete))
+  ;; :config
+  ;; ;; turn off company for magit (it remaps Tab)
+  ;; (setq company-global-modes '(not magit-mode))
+  ;; (setq company-global-modes '(not org-mode))
+  ;; (with-eval-after-load 'magit-mode
+  ;;   (define-key company-mode-map (kbd "<Tab>") nil))
+  )
 
 (defun company-yasnippet-or-completion ()
   (interactive)
