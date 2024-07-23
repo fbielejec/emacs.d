@@ -140,8 +140,16 @@
 
 ;; (add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)
 
-;; make shift + arrow keybinding work in orgmode
-(define-key org-mode-map (kbd "S-<down>") 'enlarge-window)
-(define-key org-mode-map (kbd "S-<up>") 'shrink-window)
-(define-key org-mode-map (kbd "S-<left>") 'enlarge-window-horizontally)
-(define-key org-mode-map (kbd "S-<right>") 'shrink-window-horizontally)
+;; TODO make shift + arrow keybinding work in orgmode
+;; (setq org-support-shift-select t
+;;       org-replace-disputed-keys t)
+;; (add-hook 'org-shiftup-final-hook 'shrink-window)
+;; (add-hook 'org-shiftleft-final-hook 'enlarge-window-horizontally)
+;; (add-hook 'org-shiftdown-final-hook 'enlarge-window)
+;; (add-hook 'org-shiftright-final-hook 'shrink-window-horizontally)
+
+;; (setq org-replace-disputed-keys t)
+;; (define-key org-mode-map (kbd "S-<down>") 'enlarge-window)
+;; (define-key org-mode-map (kbd "S-<up>") 'shrink-window)
+;; (define-key org-mode-map (kbd "S-<left>") 'enlarge-window-horizontally)
+;; (define-key org-mode-map (kbd "S-<right>") 'shrink-window-horizontally)
