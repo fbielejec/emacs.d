@@ -30,9 +30,8 @@
 
 ;; ;; org files to build the agenda from
 (setq org-agenda-files '("~/CloudStation/"
-                         "~/CloudStation/chatka/"
+                         "~/CloudStation/scrapbook.org"
                          "~/CloudStation/aleph/"))
-
 
 ;; custom agenda view
 (defun air-org-skip-subtree-if-priority (priority)
@@ -140,3 +139,9 @@
 ;; (setq sage-shell:input-history-cache-file "~/.emacs.d/.sage_shell_input_history")
 
 ;; (add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)
+
+;; make shift + arrow keybinding work in orgmode
+(define-key org-mode-map (kbd "S-<down>") 'enlarge-window)
+(define-key org-mode-map (kbd "S-<up>") 'shrink-window)
+(define-key org-mode-map (kbd "S-<left>") 'enlarge-window-horizontally)
+(define-key org-mode-map (kbd "S-<right>") 'shrink-window-horizontally)
