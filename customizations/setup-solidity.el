@@ -6,6 +6,10 @@
 ;; sudo rm -f /usr/bin/npm
 ;; sudo ln -s $(which node) /usr/bin/
 ;; sudo ln -s $(which npm) /usr/bin/
+;; OR
+;; cargo install solc-select --force
+;; solc-select install <<version>>
+;; solc-select use <<version>>
 
 ;; Enable Solidity mode for .sol files
 (require 'solidity-mode)
@@ -50,6 +54,8 @@
   ;; Whitespace cleanup on save
   (setq whitespace-style '(face trailing tabs spaces))
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
+
+  (define-key solidity-mode-map (kbd "C-c C-g") 'solidity-estimate-gas-at-point)
 
   )
 
