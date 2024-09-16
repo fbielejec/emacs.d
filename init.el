@@ -27,9 +27,9 @@
       ;; higher number is preffered
       package-archive-priorities
       '(
-        ("GNU ELPA"     . 5)
-        ("MELPA Stable" . 10)
-        ("MELPA"        . 0)
+        ("GNU ELPA"     . 2)
+        ("MELPA Stable" . 3)
+        ("MELPA"        . 1)
         ))
 
 ;; Load and activate emacs packages. Do this first so that the
