@@ -10,7 +10,8 @@
      ;;(define-key org-mode-map (kbd "<M-S-left>") nil)
      ;;(define-key org-mode-map (kbd "<M-S-right>") nil)
      (define-key org-mode-map (kbd "<M-left>") nil)
-     (define-key org-mode-map (kbd "<M-right>") nil)))
+     (define-key org-mode-map (kbd "<M-right>") nil)
+     ))
 ;; orgmode gets slow
 ;;(setq undo-limit 50)
 

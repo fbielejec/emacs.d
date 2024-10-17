@@ -22,7 +22,7 @@
   (setq lsp-eldoc-hook nil)
   ;; (setq lsp-enable-symbol-highlighting nil)
   ;; (setq lsp-signature-auto-activate nil)
-
+  
   ;; comment to disable rustfmt on save
   (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
@@ -36,14 +36,12 @@
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; for rust-analyzer integration
 
-;; (setq lsp-rust-analyzer-server-display-inlay-hints t)
-
 (use-package lsp-mode
   :ensure
   :commands lsp
   :custom
   ;; what to use when checking on-save. "check" is default, I prefer clippy
-  (lsp-rust-analyzer-cargo-watch-command "clippy")
+  (lsp-rust-analyzer-cargo-watch-command "check")
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
   (lsp-rust-analyzer-server-display-inlay-hints t)
@@ -57,7 +55,10 @@
   (lsp-rust-analyzer-display-reborrow-hints "always")
 
   ;; compile with all features on
+  ;; https://github.com/emacs-lsp/lsp-mode/blob/master/clients/lsp-rust.el#L196
   (lsp-rust-all-features t)
+  ;; https://github.com/emacs-lsp/lsp-mode/blob/master/clients/lsp-rust.el#L188C1-L189C1
+  (lsp-rust-features "all")
 
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
