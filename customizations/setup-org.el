@@ -31,9 +31,8 @@
 
 ;; ;; org files to build the agenda from
 (setq org-agenda-files '("~/CloudStation/"
-                         "~/CloudStation/chatka/"
+                         "~/CloudStation/scrapbook.org"
                          "~/CloudStation/aleph/"))
-
 
 ;; custom agenda view
 (defun air-org-skip-subtree-if-priority (priority)
@@ -78,12 +77,15 @@
  'org-babel-load-languages
  '((maxima . t))) ; this line activates maxima
 
+;; python/jupyter/maxima code blocks
+(setq ob-ipython-command "/home/filip/.local/bin/jupyter")
+
 ;; org-mode presentations
 (with-eval-after-load "org-tree-slide"
   (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
   (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree))
 
-;; sage
+
 (org-babel-do-load-languages 'org-babel-load-languages
   '((C . t)
     (emacs-lisp . t)
@@ -91,7 +93,6 @@
     (gnuplot . t)
     (ipython . t)
     (latex . t)
-    (ledger . t)
     (python . t)
     (maxima . t)
     (octave . t)
@@ -141,3 +142,20 @@
 ;; (setq sage-shell:input-history-cache-file "~/.emacs.d/.sage_shell_input_history")
 
 ;; (add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)
+
+;; TODO make shift + arrow keybinding work in orgmode
+;; (setq org-support-shift-select t
+;;       org-replace-disputed-keys t)
+;; (add-hook 'org-shiftup-final-hook 'shrink-window)
+;; (add-hook 'org-shiftleft-final-hook 'enlarge-window-horizontally)
+;; (add-hook 'org-shiftdown-final-hook 'enlarge-window)
+;; (add-hook 'org-shiftright-final-hook 'shrink-window-horizontally)
+
+;; (setq org-replace-disputed-keys t)
+;; (define-key org-mode-map (kbd "S-<down>") 'enlarge-window)
+;; (define-key org-mode-map (kbd "S-<up>") 'shrink-window)
+;; (define-key org-mode-map (kbd "S-<left>") 'enlarge-window-horizontally)
+;; (define-key org-mode-map (kbd "S-<right>") 'shrink-window-horizontally)
+
+;; modern styling
+;; (add-hook 'org-mode-hook 'org-modern-mode)
