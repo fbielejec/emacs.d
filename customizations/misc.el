@@ -39,6 +39,13 @@ a link you can paste in the browser."
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+(defun kill-all-buffers ()
+    "Kill all other buffers but the opened one."
+    (interactive)
+    (mapc 'kill-buffer
+          (delq (current-buffer)
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+
 ;; turn off company for magit (it remaps Tab)
 
 ;; (setq company-global-modes '(not magit-mode))
