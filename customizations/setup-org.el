@@ -101,49 +101,14 @@
     (shell . t)
 ))
 
-;; (setq sage-shell:sage-executable "/usr/bin/sage")
-
-;; (sage-shell:define-alias)
-;; ;; Turn on eldoc-mode
-;; (add-hook 'sage-shell-mode-hook #'eldoc-mode)
-;; (add-hook 'sage-shell:sage-mode-hook #'eldoc-mode)
-
-;; (setq sage-shell:use-prompt-toolkit t)
-;; (setq sage-shell:completion-function 'pcomplete)
-
-;; (require 'ob-sagemath)
-;; ;; Ob-sagemath supports only evaluating with a session.
-;; (setq org-babel-default-header-args:sage '((:session . t)
-;;                                            (:results . "output")))
-
-;; ;; C-c s for asynchronous evaluating (only for SageMath code blocks).
-;; (with-eval-after-load "org"
-;;   (define-key org-mode-map (kbd "C-c s") 'ob-sagemath-execute-async))
+;; increse the scale of latex previews
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
 
 ;; Do not confirm before evaluation
 (setq org-confirm-babel-evaluate nil)
 
-;; ;; Do not evaluate code blocks when exporting.
-;; (setq org-export-babel-evaluate nil)
-
-;; ;; Show images when opening a file.
-;; (setq org-startup-with-inline-images t)
-
-;; ;; Show images after evaluating code blocks.
-;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
-
-;; (eval-after-load "sage-shell-mode"
-;;   '(sage-shell:define-keys sage-shell-mode-map
-;;      "C-c C-i"  'helm-sage-complete
-;;      "C-c C-h"  'helm-sage-describe-object-at-point
-;;      "M-r"      'helm-sage-command-history
-;;      "C-c o"    'helm-sage-output-history))
-
-;; (setq sage-shell:input-history-cache-file "~/.emacs.d/.sage_shell_input_history")
-
-;; (add-hook 'sage-shell-after-prompt-hook #'sage-shell-view-mode)
-
 ;; TODO make shift + arrow keybinding work in orgmode
+
 ;; (setq org-support-shift-select t
 ;;       org-replace-disputed-keys t)
 ;; (add-hook 'org-shiftup-final-hook 'shrink-window)
@@ -156,6 +121,3 @@
 ;; (define-key org-mode-map (kbd "S-<up>") 'shrink-window)
 ;; (define-key org-mode-map (kbd "S-<left>") 'enlarge-window-horizontally)
 ;; (define-key org-mode-map (kbd "S-<right>") 'shrink-window-horizontally)
-
-;; modern styling
-;; (add-hook 'org-mode-hook 'org-modern-mode)
