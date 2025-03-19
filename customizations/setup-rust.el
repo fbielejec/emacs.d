@@ -1,5 +1,3 @@
-;;; --- CONFIG 2
-
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; rustic = basic rust-mode + additions
 
@@ -22,16 +20,25 @@
   (setq lsp-eldoc-hook nil)
   ;; (setq lsp-enable-symbol-highlighting nil)
   ;; (setq lsp-signature-auto-activate nil)
-  
+
   ;; comment to disable rustfmt on save
-  (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+  (setq rustic-format-on-save t)
   (add-hook 'rustic-mode-hook 'enable-paredit-mode)
-  )
+)
 
 (defun rk/rustic-mode-hook ()
-  ;; so that run C-c C-c C-r works without having to confirm
-  (setq-local buffer-save-without-query t))
+  ;; so that run C-c C-c C-r works without having to confirm, but don't try to
+  ;; save rust buffers that are not file visiting. Once
+  ;; https://github.com/brotzeit/rustic/issues/253 has been resolved this should
+  ;; no longer be necessary.
+  (when buffer-file-name
+    (setq-local buffer-save-without-query t))
+  (add-hook 'before-save-hook 'lsp-format-buffer nil t))
+
+;; (defun rk/rustic-mode-hook ()
+;;   ;; so that run C-c C-c C-r works without having to confirm
+;;   (setq-local buffer-save-without-query t))
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; for rust-analyzer integration
@@ -41,32 +48,30 @@
   :commands lsp
   :custom
   ;; what to use when checking on-save. "check" is default, I prefer clippy
-  (lsp-rust-analyzer-cargo-watch-command "check")
+  (lsp-rust-analyzer-cargo-watch-command "clippy")
   (lsp-eldoc-render-all t)
   (lsp-idle-delay 0.6)
+  ;; This controls the overlays that display type and other hints inline. Enable
+  ;; / disable as you prefer. Well require a `lsp-workspace-restart' to have an
+  ;; effect on open projects.
   (lsp-rust-analyzer-server-display-inlay-hints t)
-
-  (lsp-inlay-hint-enable t)
+  ;; or "always"
+  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
   (lsp-rust-analyzer-display-chaining-hints t)
-  (lsp-rust-analyzer-display-lifetime-elision-hints-enable "always")
-  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names t)
+  ;; or t
+  (lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
   (lsp-rust-analyzer-display-closure-return-type-hints t)
-  (lsp-rust-analyzer-display-parameter-hints t)
-  (lsp-rust-analyzer-display-reborrow-hints "always")
-
-  ;; compile with all features on
-  ;; https://github.com/emacs-lsp/lsp-mode/blob/master/clients/lsp-rust.el#L196
-  (lsp-rust-all-features t)
-  ;; https://github.com/emacs-lsp/lsp-mode/blob/master/clients/lsp-rust.el#L188C1-L189C1
-  (lsp-rust-features "all")
+  ;; or t
+  (lsp-rust-analyzer-display-parameter-hints nil)
+  ;; or "always"
+  (lsp-rust-analyzer-display-reborrow-hints nil)
 
   :config
   ;; comment to remove UI mode
-  ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   ;; bump up the chunk-processing threshold to allow for a smoother Emacs experience.
-  (setq read-process-output-max (* 1024 1024)) ;; 1MB
-  (setq lsp-idle-delay 0.5)
-  )
+  ;; (setq read-process-output-max (* 1024 1024)) ;; 1MB
+)
 
 (use-package lsp-ui
   :ensure
@@ -75,7 +80,6 @@
   (lsp-ui-peek-always-show t)
   (lsp-ui-sideline-show-hover t)
   (lsp-ui-doc-enable nil))
-
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; inline errors
@@ -96,20 +100,21 @@
   :ensure
   :bind
   (:map company-active-map
-        ("C-n". company-select-next)
-        ("C-p". company-select-previous)
-        ("M-<". company-select-first)
-        ("M->". company-select-last))
+              ("C-n". company-select-next)
+              ("C-p". company-select-previous)
+              ("M-<". company-select-first)
+              ("M->". company-select-last))
   (:map company-mode-map
         ("<tab>". tab-indent-or-complete)
         ("TAB". tab-indent-or-complete))
+
   ;; :config
   ;; ;; turn off company for magit (it remaps Tab)
   ;; (setq company-global-modes '(not magit-mode))
   ;; (setq company-global-modes '(not org-mode))
   ;; (with-eval-after-load 'magit-mode
   ;;   (define-key company-mode-map (kbd "<Tab>") nil))
-  )
+)
 
 (defun company-yasnippet-or-completion ()
   (interactive)
@@ -138,28 +143,12 @@
             (company-complete-common)
           (indent-for-tab-command)))))
 
+;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+;; Create / cleanup rust scratch projects quickly
+
+(use-package rust-playground :ensure)
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; for Cargo.toml and other config files
 
 (use-package toml-mode :ensure)
-
-;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-;; to fix lsp-find-locations: Symbol’s value as variable is void: xref-auto-jump-to-first-xref
-
-;; (defun my/xref-just-jump-to-first (xrefs alist)
-;;   "However many candidates, just jump to the first."
-;;   (xref-push-marker-stack)
-;;   (xref--pop-to-location (car xrefs) nil))
-
-;; (defun xref-auto-jump-to-first-xref my/xref-just-jump-to-first
-;;   (xref--pop-to-location (car xrefs) nil))
-
-;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-;; setting up debugging support with dap-mode
-
-(use-package exec-path-from-shell
-  :ensure
-  :init (exec-path-from-shell-initialize))
-
-(add-to-list 'auto-mode-alist '("\\.rs$" . rustic-mode))
