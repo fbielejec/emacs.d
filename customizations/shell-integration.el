@@ -29,6 +29,3 @@
     (exec-path-from-shell-copy-envs '("PATH")))
 
   )
-
-;; e2e tests
-(setenv "CONTRACTS_NODE" "/home/filip/CloudStation/aleph/membrane-bridge/azero/scripts/azero_contracts_node.sh")

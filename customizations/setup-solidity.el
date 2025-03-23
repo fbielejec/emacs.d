@@ -46,10 +46,10 @@
   ;; (setq solidity-flycheck-solc-additional-allow-paths '("/home/filip/CloudStation/aleph/my-lz-oapp/node_modules/"))
 
   ;; to find npm
-  (setq exec-path (append exec-path '("~/.nvm/versions/node/v18.19.0/bin")))
+  (setq exec-path (append exec-path '("~/.nvm/versions/node/v23.10.0/bin")))
   ;; (setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solcjs")
-  (setq solidity-solc-path "/usr/local/bin/solc")
-  (setq solidity-solium-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solium")
+  (setq solidity-solc-path "/home/filip/.cargo/bin/solc")
+  (setq solidity-solium-path "/home/filip/.nvm/versions/node/v23.10.0/bin/solium")
 
   ;; Whitespace cleanup on save
   (setq whitespace-style '(face trailing tabs spaces))

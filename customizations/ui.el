@@ -5,8 +5,8 @@
 ;; preferences
 
 ;; Fantasque Sans Mono font (install from the repos)
-;; (set-frame-font (font-spec :name "Fantasque Sans Mono-10" :width 'normal :height 100))
-(set-frame-font (font-spec :name "Fira Mono Medium-14" :width 'normal :height 100))
+;;(set-frame-font (font-spec :name "Fantasque Sans Mono-10" :width 'normal :height 100))
+(set-frame-font (font-spec :name "Fira Mono Medium-12" :width 'normal :height 100))
 
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
@@ -32,8 +32,8 @@
 ;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; (add-to-list 'load-path "~/.emacs.d/themes")
 ;;(load-theme 'tomorrow-night-bright t)
-;; (load-theme 'zenburn t)
-(load-theme 'gruvbox t)
+(load-theme 'zenburn t)
+;;(load-theme 'gruvbox t)
 
 ;; Uncomment the lines below by removing semicolons and play with the
 ;; values in order to set the width (in characters wide) and height
