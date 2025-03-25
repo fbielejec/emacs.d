@@ -17,13 +17,16 @@
 
 ;; configure org-mode for Clojure code blocks
 (require 'ob)
-(require 'ob-clojure)
-;;(require 'org-babel-clojure)
-(setq org-babel-clojure-backend 'cider)
-(require 'cider)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((clojure . t)))
+;; (require 'ob-clojure)
+;; ;;(require 'org-babel-clojure)
+;; (setq org-babel-clojure-backend 'cider)
+;; (require 'cider)
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((clojure . t)))
+
+ ;; Do not confirm before evaluation
+(setq org-confirm-babel-evaluate nil)
 
 ;; cycle between these states
 (setq org-todo-keywords
@@ -122,6 +125,11 @@
 
 ;; Do not confirm before evaluation
 (setq org-confirm-babel-evaluate nil)
+
+(add-hook 'org-mode-hook 'filip/org-mode-hook)
+(defun filip/org-mode-hook ()
+  ;; needs org-make-toc package
+  (add-hook 'before-save-hook 'org-make-toc-mode))
 
 ;; ;; Do not evaluate code blocks when exporting.
 ;; (setq org-export-babel-evaluate nil)
