@@ -40,6 +40,10 @@
 ;; This also sets the load path.
 (package-initialize)
 
+;;(package-generate-autoloads "magit" "~/.emacs.d/elpa/magit-4.3.2/")
+;;(package-generate-autoloads "transient" "~/.emacs.d/elpa/transient-0.8.7/")
+;;(package-generate-autoloads "compat" "~/.emacs.d/elpa/compat-30.1.0.0/")
+
 ;; Download the ELPA archive description if needed.
 ;; This informs Emacs about the latest versions of all packages, and
 ;; makes them available for download.
@@ -56,18 +60,18 @@
 
     ;; key bindings and code colorization for Clojure
     ;; https://github.com/clojure-emacs/clojure-mode
-    clojure-mode
+    ;;clojure-mode
 
     ;; extra syntax highlighting for clojure
-    clojure-mode-extra-font-locking
+    ;;clojure-mode-extra-font-locking
 
     ;; integration with a Clojure REPL
     ;; https://github.com/clojure-emacs/cider
-    cider
+    ;;cider
 
     ;; refactoring support for Clojure projects
     ;; https://github.com/clojure-emacs/clj-refactor.el
-    clj-refactor
+    ;;clj-refactor
 
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
@@ -87,10 +91,10 @@
     rainbow-delimiters
 
     ;; edit html tags like sexps
-    tagedit
+    ;; tagedit
 
     ;; git integration
-    magit
+    ;; magit
 
     ;; declare and configure packages macro
     use-package
@@ -106,24 +110,21 @@
     multiple-cursors
 
     ;; editing dockerfiles
-    dockerfile-mode
+    ;; dockerfile-mode
 
     ;; editing yaml
     yaml-mode
 
-    ;; JSX integration
-    rjsx-mode
-
     ;; Java in emacs
-    lsp-java
-    idle-highlight-mode
+    ;;lsp-java
+    ;;idle-highlight-mode
     ;; lsp-java-treemacs
 
     ;; Solidity editing
-    solidity-mode
+    ;;solidity-mode
 
     ;; syntax checking extension
-    ;; flycheck
+    flycheck
 
     ;; better searching w/ helm-projectile-grep
     helm-projectile
@@ -135,6 +136,11 @@
     racer
     company
     rust-mode
+
+    treemacs
+
+    gptel
+
     ))
 
 (dolist (p my-packages)
@@ -194,31 +200,16 @@
 (load "elisp-editing.el")
 
 ;; For saving and restoring buffers
-(load "setup-desktop.el")
+;; (load "setup-desktop.el")
 
 ;; Language-specific
 (load "setup-org.el")
-(load "setup-clojure.el")
+;;(load "setup-clojure.el")
 ;;(load "setup-js.el")
-(load "setup-java.el")
-(load "setup-solidity.el")
+;;(load "setup-java.el")
+;;(load "setup-solidity.el")
 (load "setup-rust.el")
-(load "setup-ess.el")
-(load "setup-python.el")
+;;(load "setup-ess.el")
+;;(load "setup-python.el")
 ;;(load "setup-wat.el")
 (load "setup-gptel.el")
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(coffee-tab-width 2)
- '(package-selected-packages
-   '(epc ctable concurrent quelpa-use-package quelpa typescript-mode graphql-mode lsp-mode clojure-mode flycheck company-lsp zenburn-theme yaml-mode which-key use-package toml-mode tagedit solidity-mode smex rustic rjsx-mode rainbow-delimiters racer magit-popup magit lsp-ui lsp-java ido-completing-read+ idle-highlight-mode helm-projectile helm-lsp gruvbox-theme ghub flycheck-rust expand-region exec-path-from-shell ein dockerfile-mode company clojure-mode-extra-font-locking clj-refactor buffer-move)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
