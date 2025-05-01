@@ -167,3 +167,6 @@
 
 ;; modern styling
 ;; (add-hook 'org-mode-hook 'org-modern-mode)
+
+;; bigger latex previews
+(setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
