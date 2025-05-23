@@ -210,6 +210,6 @@
 ;;(load "setup-solidity.el")
 (load "setup-rust.el")
 ;;(load "setup-ess.el")
-;;(load "setup-python.el")
+(load "setup-python.el")
 ;;(load "setup-wat.el")
 (load "setup-gptel.el")

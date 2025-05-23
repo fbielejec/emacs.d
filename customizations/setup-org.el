@@ -70,7 +70,6 @@
   (define-key org-tree-slide-mode-map (kbd "<f9>") 'org-tree-slide-move-previous-tree)
   (define-key org-tree-slide-mode-map (kbd "<f10>") 'org-tree-slide-move-next-tree))
 
-
 (org-babel-do-load-languages 'org-babel-load-languages
   '((C . t)
     (plantuml . t)
