@@ -76,9 +76,10 @@
     (emacs-lisp . t)
     (fortran . t)
     (gnuplot . t)
-    ;; (ipython . t)
     (latex . t)
+    ;; Python & Jupyter
     (python . t)
+    (jupyter . t)
     (maxima . t)
     (octave . t)
     (org . t)
@@ -88,6 +89,9 @@
     ;; graphviz
     (dot . t)
 ))
+
+;; override the built-in python SRC blocks with jupyter-python.
+(org-babel-jupyter-override-src-block "python")
 
 ;; Do not confirm before evaluation
 (setq org-confirm-babel-evaluate nil)

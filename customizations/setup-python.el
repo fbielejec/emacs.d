@@ -3,6 +3,8 @@
 (use-package python-mode
   :ensure t
   :hook (python-mode . my/python-setup)
+  :custom
+  (python-shell-interpreter "python3")
   :config
   (defun my/python-setup ()
     "Setup Python development environment."
@@ -90,6 +92,9 @@
   (use-package aggressive-indent
     :ensure t
     :hook (python-mode . aggressive-indent-mode)))
+
+;; (use-package jupyter
+;;   :straight t)
 
 ;; Optional: Set up virtualenv integration
 ;; (use-package pyvenv
