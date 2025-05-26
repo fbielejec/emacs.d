@@ -1,5 +1,9 @@
 ;; -*- lexical-binding: t -*-
 
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
+
+(setq python-interpreter "/usr/bin/python3")
+
 (use-package python-mode
   :ensure t
   :hook (python-mode . my/python-setup)
@@ -15,10 +19,10 @@
     (paredit-mode 1)
 
     ;; Enable Tree-sitter
-    (when (fboundp 'tree-sitter-hl-mode)
-      (tree-sitter-hl-mode))
-    (when (fboundp 'tree-sitter-mode)
-      (tree-sitter-mode))
+   ;; (when (fboundp 'tree-sitter-hl-mode)
+   ;;   (tree-sitter-hl-mode))
+   ;;  (when (fboundp 'tree-sitter-mode)
+   ;;   (tree-sitter-mode))
 
     ;; Setup whitespace cleaning on save
     (add-hook 'before-save-hook 'whitespace-cleanup nil t)
@@ -52,11 +56,11 @@
           lsp-pylsp-plugins-flake8-enabled t))
 
   ;; Configure Tree-sitter
-  (use-package tree-sitter
-    :ensure t
-    :config
-    (use-package tree-sitter-langs
-      :ensure t))
+ ;; (use-package tree-sitter
+ ;;   :ensure t
+ ;;   :config
+ ;;   (use-package tree-sitter-langs
+ ;;     :ensure t))
 
   ;; Configure Paredit
   (use-package paredit
@@ -93,8 +97,11 @@
     :ensure t
     :hook (python-mode . aggressive-indent-mode)))
 
-;; (use-package jupyter
-;;   :straight t)
+;; experimental: evaluating tree sitter major mode
+;; (setq major-mode-remap-alist
+;;       '(
+;;         (python-mode . python-ts-mode)
+;;         ))
 
 ;; Optional: Set up virtualenv integration
 ;; (use-package pyvenv
