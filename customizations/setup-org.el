@@ -103,3 +103,10 @@
 
 ;; bigger latex previews
 (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0))
+
+;; create Anki flashcards from org
+(use-package anki-editor
+  :ensure t)
+
+(use-package org-roam
+  :ensure t)
