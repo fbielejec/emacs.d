@@ -53,3 +53,9 @@ a link you can paste in the browser."
 
 (add-hook 'org-mode-hook (lambda() (company-mode 0)))
 (add-hook 'magit-mode-hook (lambda() (company-mode 0)))
+
+;; insert uuid at point
+(defun insert-uuid()
+  (interactive)
+  (require 'uuid)
+  (insert (upcase (uuid-string))))
