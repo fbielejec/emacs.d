@@ -122,3 +122,11 @@
   :bind
   ("C-." . er/expand-region)
   ("C-," . er/contract-region))
+
+;; company autocompletions everywhere
+(use-package company
+  :ensure
+  :hook (after-init . global-company-mode)
+  :config
+  (setq company-idle-delay 0.2
+        company-minimum-prefix-length 1))
