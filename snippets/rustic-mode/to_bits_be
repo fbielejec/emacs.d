@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: to_bits_be
+# key: <to_bits_be
+# --
+
+let bits_be : Vec<i32> = (0..32).map(|i| (n$0 >> i) & 1).collect();

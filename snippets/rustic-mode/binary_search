@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: binary_search
+# key: <binary_search
+# --
+
+let binary_search = |a$0: Vec<i32>, target: i32| -> i32 {
+    let mut left = 0;
+    let mut right = a.len() - 1;
+
+    while left < right {
+        let middle = (right + left) / 2;
+
+        if a[middle] < target {
+            left = middle + 1;
+        } else if a[middle] > target {
+            right = middle - 1;
+        } else {
+            return middle as i32;
+        }
+    }
+
+    -1
+};

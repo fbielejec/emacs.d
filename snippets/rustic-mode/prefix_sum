@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: prefix_sum
+# key: <prefix_sum
+# --
+
+let prefix: Vec<u32> = a$0
+    .iter()
+    .scan(0, |sum, element| {
+        *sum += element;
+        Some(*sum)
+    })
+    .collect();
+
+let sum = |i: usize, j: usize| -> u32 { prefix[j] - prefix[i] + nums[i] };
