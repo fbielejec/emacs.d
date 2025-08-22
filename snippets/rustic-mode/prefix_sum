@@ -3,7 +3,7 @@
 # key: <prefix_sum
 # --
 
-let prefix: Vec<u32> = a$0
+let prefix: Vec<i32> = a$0
     .iter()
     .scan(0, |sum, element| {
         *sum += element;
@@ -11,4 +11,4 @@ let prefix: Vec<u32> = a$0
     })
     .collect();
 
-let sum = |i: usize, j: usize| -> u32 { prefix[j] - prefix[i] + nums[i] };
+let sum = |i: usize, j: usize| -> i32 { prefix[j] - prefix[i] + a[i] };

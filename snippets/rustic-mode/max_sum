@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: max_sum_subarray
+# key: <max_sum
+# --
+
+let kadanes = |a: Vec<i32>| -> i32 {
+    let mut global = a[0];
+    let mut current = a[0];
+
+    for elem in a.iter().skip(1) {
+        // largest sum subarray from the ones ending at i
+        current = max(*elem, elem + current);
+
+        // largest sum subaray from 0 to i
+        global = max(current, global);
+    }
+
+    global
+};

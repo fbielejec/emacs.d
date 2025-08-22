@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: but_last
+# key: <but_last
+# --
+
+for current in a.iter()$0.skip(0).take(a.len() - 2) {
+     println!("{current}")
+}

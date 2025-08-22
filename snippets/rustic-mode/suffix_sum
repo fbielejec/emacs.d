@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: suffix_sum
+# key: <suffix_sum
+# --
+
+// suffix[i] is the sum of a elements from i till the end
+let mut suffix = vec![];
+
+let _ = a$0.iter().rev().fold(0, |acc, &x| {
+    let new_sum = acc + x;
+    suffix.push(new_sum);
+    new_sum
+});
+
+suffix.reverse();
