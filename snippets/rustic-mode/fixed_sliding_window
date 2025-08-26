@@ -3,17 +3,18 @@
 # key: <fixed_sliding_window
 # --
 
-fn $0fixed_k_window(a: Vec<i32>, k: i32) -> i32 {
     let k = k as usize;
 
     // current tracks the window
     let mut current = 0;
+    let mut answer = 0;
 
     // build the first window
     for i in 0..k {
+      // current += a[i]
     }
 
-    // update the answer    
+    // update the answer
 
     // keep moving the window
     for i in k..a.len() {
@@ -23,5 +24,4 @@ fn $0fixed_k_window(a: Vec<i32>, k: i32) -> i32 {
     }
 
     // return the answer
-    todo!()
-}
+    answer

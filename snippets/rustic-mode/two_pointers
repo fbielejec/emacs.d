@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: two_pointers
+# key: <two_pointers
+# --
+
+    let mut left = 0;
+    let mut right = a.len() - 1;
+
+    /// stores the answer
+    let mut best = i32::MAX;
+
+    while left <= right {
+        let l = sorted[left];
+        let r = sorted[right];
+
+        // update the answer
+        best = min(best, l + r);
+
+        // decide whether to move right, left or both
+        right -= 1;
+        left += 1;
+    }
+
+    // optionally, if still some elements left to process
+
+    // some elements left to process on the left
+    while left < a.len() {
+        left += 1;
+    }
+
+    // some elements left to process on the right
+    while right < a.len() {
+        right += 1;
+    }

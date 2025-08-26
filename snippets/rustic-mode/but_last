@@ -3,6 +3,6 @@
 # key: <but_last
 # --
 
-for current in a.iter()$0.skip(0).take(a.len() - 2) {
-     println!("{current}")
+for (i, current) in a.iter().enumerate().skip(0).take(a.len() - 2) {
+    println!("i {i} c {current}");
 }

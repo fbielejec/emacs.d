@@ -2,8 +2,11 @@
 # name: test
 # key: test
 # --
-#[test]
-fn it_works() {
-    assert_eq!(2 + 2, 4);
-}
 
+#[test]
+fn test_it() {
+    let a = vec![];
+    let k = 2;
+    let answer = 5;
+    assert_eq!(answer, it(a, k));
+}
