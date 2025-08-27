@@ -8,5 +8,5 @@ fn test_it() {
     let a = vec![];
     let k = 2;
     let answer = 5;
-    assert_eq!(answer, it(a, k));
+    assert_eq!(answer, $0(a, k));
 }

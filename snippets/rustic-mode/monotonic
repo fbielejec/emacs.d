@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: monotonic
+# key: <monotonic
+# --
+
+    let mut stack = vec![];
+
+    for next in a {
+        // maintain the increasing property (or decreasing if peek < next)
+        while !stack.is_empty() && stack.last().unwrap() > &next {
+            stack.pop();
+        }
+
+        // based on some logic
+        if true {
+            stack.push(next);
+        }
+    }

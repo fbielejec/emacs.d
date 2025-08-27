@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: max_key 
+# key: <max_key
+# --
+
+let (leader, count) = counts
+        .iter()
+        .max_by(|a, b| a.1.cmp(b.1))
+        .unwrap();

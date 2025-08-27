@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: prefix_sum2
+# key: <prefix_sum2
+# --
+
+    let mut prefix = vec![0; a.len()];
+    prefix[0] = a[0];
+
+    for i in 1..a.len() {
+        prefix[i] = prefix[i - 1] + a[i];
+    }
+
+    // sum of &a[i..=j]
+    let sum = |i: usize, j: usize| -> i32 {
+        match i {
+            0 => prefix[j - 1],
+            _ => prefix[j] - prefix[i - 1],
+        }
+    };

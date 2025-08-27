@@ -3,4 +3,5 @@
 #key : ase
 #contributor : robert
 # --
+
 assert_eq!(${1:a}, ${2:b});

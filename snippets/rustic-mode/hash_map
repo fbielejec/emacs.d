@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: hash_map
+# key: <hash_map
+# --
+
+// hash map literal
+let m: std::collections::HashMap<char, i32> = [('A', 1), ('C', 2), ('G', 3), ('T', 4)].into();
