@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: sliding_window_fixed
+# key: <sliding_window_fixed
+# --
+
+    let k = k as usize;
+
+    // current tracks the window
+    let mut current = 0;
+    let mut answer = 0;
+
+    // build the first window
+    for i in 0..k {
+      // current += a[i]
+    }
+
+    // update the answer
+
+    // keep moving the window
+    for i in k..a.len() {
+        // Add arr[i] to window
+        // Remove arr[i - k] from window
+        // Update the answer
+    }
+
+    // return the answer
+    answer

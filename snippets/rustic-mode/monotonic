@@ -6,10 +6,16 @@
     let mut stack = vec![];
 
     for next in a {
-        // maintain the increasing property (or decreasing if peek < next)
-        while !stack.is_empty() && stack.last().unwrap() > &next {
+        // monotonic decreasing (x[i+1] <= x[i])
+        // remove elements that would break that property
+        while !stack.is_empty() && next > *stack.last().unwrap() {
             stack.pop();
         }
+
+        // monotonic increasing (x[i+1] >= x[i])
+        // while !stack.is_empty() && next < *stack.last().unwrap() {
+        //     stack.pop();
+        // }
 
         // based on some logic
         if true {

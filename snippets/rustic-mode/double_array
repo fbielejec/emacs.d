@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: double
+# key: <double_array
+# --
+
+    let doubled: Vec<i32> = a.clone().into_iter().chain(a.clone()).collect();

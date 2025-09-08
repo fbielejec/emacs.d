@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: count_sort
+# key: <count_sort
+# --
+
+let mut max_value = i32::MIN;
+for elem in &a {
+  max_value = max(max_value, *elem);
+}
+
+let mut counts = vec![0; (max_value + 1) as usize];
+for elem in &a {
+  counts[*elem as usize]+=1;
+}
+
+let mut i = 0;
+for elem in 0..=max_value as usize {
+  while counts[elem] > 0 {
+    a[i] = elem as i32;
+    counts[elem] -=1;
+    i+=1;
+  }
+}

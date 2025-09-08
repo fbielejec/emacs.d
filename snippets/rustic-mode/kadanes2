@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: kadanes2
+# key: <kadanes2
+# --
+
+    // maximum sum subarrays ending at index i
+    let mut e = vec![0; n];
+    for i in 1..n - 1 {
+        e[i] = max(a[i], e[i - 1] + a[i]);
+    }
+
+    // maximum sum subarrays starting at index i
+    let mut s = vec![0; n];
+    for i in (1..n - 1).rev() {
+        s[i] = max(a[i], s[i + 1] + a[i]);
+    }

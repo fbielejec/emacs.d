@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: sort_by
+# key: <sort_by
+# --
+
+    // elements are sorted by their counts (ascending)
+    sorted.sort_by(|a, b| {
+        let count_a = counts.get(a).unwrap();
+        let count_b = counts.get(b).unwrap();
+        count_a.partial_cmp(count_b).unwrap()
+    });
