@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: graph_bfs2
+# key: <graph_bfs2
+# --
+
+    let mut queue = VecDeque::new();
+    let mut visited = HashSet::new();
+
+    visited.insert(start_node);
+    queue.push_back(start_node);
+
+    while !queue.is_empty() {
+        let nodes_on_level = queue.len();
+
+        for _ in 0..nodes_on_level {
+            let node = queue.pop_front().unwrap();
+
+            for neighbour in &graph.get(node) {
+                if !visited.contains(neighbour) {
+                    visited.insert(*neighbour);
+                    queue.push_back(*neighbour);
+                }
+            }
+        }
+
+        // processed all the nodes on that level
+    }

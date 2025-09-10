@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: graph_bfs
+# key: <graph_bfs
+# --
+
+    let mut queue = VecDeque::<i32>::new();
+    visited.insert(start_node);
+    queue.push_back(start_node);
+
+    while let Some(node) = queue.pop_front() {
+        if let Some(neighbours) = graph.get(&node) {
+            for neighbour in neighbours {
+                if !visited.contains(neighbour) {
+                    visited.insert(*neighbour);
+                    queue.push_back(*neighbour);
+                }
+            }
+        }
+    }
