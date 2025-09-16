@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: topo_sort2
+# key: <topo_sort2
+# --
+
+fn topo_sort(graph: HashMap<i32, Vec<i32>>) -> Vec<i32> {
+    fn find_indegrees(graph: &HashMap<i32, Vec<i32>>) -> HashMap<i32, i32> {
+        let mut indegrees = HashMap::new();
+
+        // go through the nodes
+        for (node, neighbours) in graph {
+            // for nodes with initial in-degree 0
+            let _ = *indegrees.entry(*node).or_insert(0);
+
+            // increment each neighbour's in-degree by 1 (the node points to this neighbour)
+            for neighbour in neighbours {
+                *indegrees.entry(*neighbour).or_insert(0) += 1;
+            }
+        }
+
+        indegrees
+    }
+
+    let mut ordering = vec![];
+    let mut queue = VecDeque::new();
+    let mut indegrees = find_indegrees(&graph);
+
+    // push "leave" nodes to the queue
+    for node in graph.keys() {
+        if *indegrees.get(node).unwrap() == 0 {
+            queue.push_back(*node);
+        }
+    }
+
+    while !queue.is_empty() {
+        let size = queue.len();
+        // process all independent nodes
+        for _ in 0..size {
+            let node = queue.pop_front().unwrap();
+
+            // only nodes with an indegree 0 are in the queue at this point
+            ordering.push(node);
+
+            if let Some(neighbours) = graph.get(&node) {
+                // remvove the node with in-degree 0 from the graph
+                // for each neighbour of the node decrease it's in-degree by 1
+                for neighbour in neighbours {
+                    *indegrees.entry(*neighbour).or_insert(0) -= 1;
+
+                    if *indegrees.get(neighbour).unwrap() == 0 {
+                        queue.push_back(*neighbour);
+                    }
+                }
+            }
+
+         // all concurrent ndoes have been processed
+        }
+    }
+
+    ordering
+}

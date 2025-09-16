@@ -3,6 +3,8 @@
 # key: <but_last
 # --
 
-for (i, current) in a.iter().enumerate().skip(0).take(a.len() - 2) {
-    println!("i {i} c {current}");
+// skip(1) for but-first
+for (i, current) in a.iter().enumerate().skip(1).take(a.len() - 2) {
+    let previous = a[i - 1];
+    println!("i: {i} PREV: {previous}: CURR: {current}");    
 }

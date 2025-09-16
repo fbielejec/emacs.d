@@ -3,7 +3,9 @@
 # key: <graph_bfs
 # --
 
-    let mut queue = VecDeque::<i32>::new();
+    let mut queue = VecDeque::new();
+    let mut visited = HashSet::new();
+
     visited.insert(start_node);
     queue.push_back(start_node);
 

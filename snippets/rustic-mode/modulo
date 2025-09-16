@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: modulo
+# key: <modulo
+# --
+
+    // returns a %% b
+    fn modulo(a: i32, b: i32) -> i32 {
+        // this is because Rust has remainder and not modulus operator
+        ((a % b) + b) % b
+    }

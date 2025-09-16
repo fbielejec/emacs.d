@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: in_bounds 
+# key: <in_bounds
+# --
+
+    fn in_bounds(row: i32, col: i32, nrows: usize, ncols: usize) -> bool {
+        row >= 0 && row < (nrows as i32) && col >= 0 && col < (ncols as i32)
+    }
