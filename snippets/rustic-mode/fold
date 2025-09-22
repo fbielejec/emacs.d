@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: fold
+# key: <fold
+# --
+
+
+
+    let total = nums.iter().fold(0.0, |mut acc, element| -> f64 {
+        acc += element.0.0;
+        acc
+    });

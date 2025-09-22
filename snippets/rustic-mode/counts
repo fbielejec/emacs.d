@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: counts
-# key: <counts
-# --
-
-    let mut counts: std::collections::HashMap<i32, i32> = std::collections::HashMap::new();
-    for elem in a {
-        *counts.entry(elem).or_insert(0) += 1;
-    }

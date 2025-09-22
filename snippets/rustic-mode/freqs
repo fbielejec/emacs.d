@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: counts
+# key: <counts
+# --
+
+    let mut freqs: std::collections::HashMap<i32, i32> = std::collections::HashMap::new();
+    for elem in a {
+        *freqs.entry(elem).or_insert(0) += 1;
+    }

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: graph_dfs
+# key: <graph_dfs
+# --
+
+    fn dfs(node: i32, graph: HashMap<i32, Vec<i32>>, seen: &mut HashSet<i32>) {
+        if let Some(neighbours) = graph.get(&node) {
+            for neighbour in neighbours {
+                if !seen.contains(neighbour) {
+                    seen.insert(*neighbour);
+                    dfs(*neighbour, graph.clone(), seen);
+                }
+            }
+        }
+    }

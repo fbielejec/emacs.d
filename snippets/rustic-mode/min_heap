@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: min_heap
+# key: <min_heap
+# --
+
+let a: BinaryHeap<Reverse<i32>> = a.into_iter().map(std::cmp::Reverse).collect();

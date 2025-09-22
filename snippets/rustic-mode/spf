@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: shortest_path_first
+# key: <spf
+# --
+
+    fn spf(
+        root: String,
+        graph: &HashMap<String, Vec<(String, i32)>>,
+        distances: &mut HashMap<String, i32>,
+    ) {
+        let mut queue = VecDeque::new();
+        queue.push_back(root.clone());
+        distances.insert(root.clone(), 0);
+
+        if let Some(node) = queue.pop_front() {
+            // shortest path from the root to the node
+            let root_to_node_dist = *distances.get(&node).unwrap();
+
+            if let Some(neighbours) = graph.get(&node) {
+                for (neighbour, weight) in neighbours {
+                    // current shortest path from the root to the neighbour
+                    let root_to_neighbour_distance = *distances.get(neighbour).unwrap();
+                    // potentially faster path
+                    let new_root_to_neighbour_distance = root_to_node_dist + weight;
+
+                    // update the distance for neighbour and enqueue it
+                    if new_root_to_neighbour_distance < root_to_neighbour_distance {
+                        distances.insert(neighbour.to_string(), new_root_to_neighbour_distance);
+                        queue.push_back(neighbour.to_string());
+                    }
+                }
+            }
+        }
+    }
