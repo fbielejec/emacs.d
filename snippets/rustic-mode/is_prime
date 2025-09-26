@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: is_prime
+# key: <is_prime
+# --
+
+     // trial division primality test
+    fn is_prime(n: i32) -> bool {
+        if n < 2 {
+            return false;
+        }
+
+        let sqrt_n = (n as f32).sqrt() as i32;
+        // for every integer from to up to the sqrt(n)
+        for div in 2..=sqrt_n {
+            // if it is divisible by any of these integers it is composite
+            if n % div == 0 {
+                return false;
+            }
+        }
+        true
+    }

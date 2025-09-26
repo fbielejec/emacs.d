@@ -53,7 +53,7 @@ fn topo_sort(graph: HashMap<i32, Vec<i32>>) -> Vec<i32> {
                 }
             }
 
-         // all concurrent ndoes have been processed
+         // all concurrent nodes have been processed
         }
     }
 

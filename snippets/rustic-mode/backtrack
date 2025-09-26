@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: backtrack
+# key: <backtrack
+# --
+
+    fn backtrack(current: Vec<i32>, nums: &[i32], answer: &mut Vec<Vec<i32>>) {
+        let n = nums.len();
+        if current.len() == n {
+            // return current.into_iter().collect();
+            answer.push(current);
+            return;
+        }
+
+        let mut next = current.clone();
+        for num in nums {
+            if !next.contains(num) {
+                next.push(*num);
+                // move to a child
+                backtrack(next.clone(), nums, answer);
+                // backtrack to the parent
+                next.pop();
+            }
+        }
+    }

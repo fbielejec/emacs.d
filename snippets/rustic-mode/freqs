@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: counts
-# key: <counts
+# name: freqs
+# key: <freqs
 # --
 
     let mut freqs: std::collections::HashMap<i32, i32> = std::collections::HashMap::new();
