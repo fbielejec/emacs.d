@@ -3,22 +3,19 @@
 # key: <backtrack
 # --
 
-    fn backtrack(current: Vec<i32>, nums: &[i32], answer: &mut Vec<Vec<i32>>) {
-        let n = nums.len();
-        if current.len() == n {
-            // return current.into_iter().collect();
+    fn backtrack(current: Vec<i32>, start: usize, nums: &[i32], answer: &mut Vec<Vec<i32>>) {
+        if current.len() == nums.len() {
             answer.push(current);
             return;
         }
 
+        // considers permutations with repetitions
         let mut next = current.clone();
-        for num in nums {
-            if !next.contains(num) {
-                next.push(*num);
-                // move to a child
-                backtrack(next.clone(), nums, answer);
-                // backtrack to the parent
-                next.pop();
-            }
+        for i in start..nums.len() {
+            next.push(nums[i]);
+            // start index can be omited (always starts from 0)
+            // start from the i-th index to generate combinations (unordered, skip the permutations)
+            backtrack(next.clone(), start, nums, answer);
+            next.pop();
         }
     }
