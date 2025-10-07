@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: string_to_digits
+# key: <string_to_digits
+# --
+
+    // "23" -> vec[2,3]
+    fn string_to_digits(input: &str) -> Vec<i32> {
+        input
+            .chars()
+            .map(|c| c.to_digit(10).unwrap() as i32)
+            .collect()
+    }

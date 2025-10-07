@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: directions
+# key: <directions
+# --
+
+        let directions = [
+            (0i32, 1i32), // move right (to row, col + 1)
+            (0, -1),      // move left (to row, col - 1
+            (1, 0),       // move up (to row + 1, col)
+            (-1, 0),      // move down (to row - 1, col)
+        ];
