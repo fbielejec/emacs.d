@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: tree_dfs2
+# key: <tree_dfs2
+# --
+
+      let mut stack = vec![];
+
+      if let Some(node) = root {
+          stack.push(node);
+      }
+
+      while let Some(node) = stack.pop() {
+
+          // do work on the parent node
+          println!("{}", node.clone().borrow().val);
+
+          // stack is LIFO, so we push right first
+
+          if let Some(right) = &node.borrow().right {
+              stack.push(right.clone());
+          }
+
+          if let Some(left) = &node.borrow().left {
+              stack.push(left.clone());
+          }
+      }

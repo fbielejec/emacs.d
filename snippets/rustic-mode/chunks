@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: chunks
+# key: <chunks
+# --
+
+for i in (0..a.len()).step_by(2) {
+    println!("{i} and {}", i + 1);
+}

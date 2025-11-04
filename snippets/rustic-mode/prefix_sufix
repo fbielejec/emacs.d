@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: prefix_suffix
+# key: <prefix_suffix
+# --
+
+            let split = 0;
+            let prefix: String = target.chars().take(split).collect();
+            let sufix: String = target.chars().skip(split).collect();

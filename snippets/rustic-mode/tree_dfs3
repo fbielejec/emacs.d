@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: tree_dfs3
+# key: <tree_dfs3
+# --
+
+// preorder traversal
+fn dfs(node: Option<Rc<RefCell<TreeNode>>>) {
+    if node.is_none() {
+        return;
+    }
+
+    println!("{:?}", node.clone().unwrap().borrow().val);
+
+    dfs(node.clone().unwrap().borrow().left.clone());
+    dfs(node.clone().unwrap().borrow().right.clone());
+}

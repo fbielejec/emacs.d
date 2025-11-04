@@ -1,0 +1,56 @@
+# -*- mode: snippet -*-
+# name: debug_tree
+# key: <debug_tree
+# --
+
+#[derive(Clone)]
+pub struct Node {
+    value: Vec<u8>,
+    left: Option<Box<Node>>,
+    right: Option<Box<Node>>,
+}
+
+impl fmt::Debug for Node {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        // Custom recursive format
+        f.debug_struct("Node")
+            .field("value", &hex::encode(&self.value))
+            .field("left", &self.left)
+            .field("right", &self.right)
+            .finish()
+    }
+}
+
+impl Node {
+    // Custom method for pretty-printing
+    pub fn debug_format(&self, depth: usize) -> String {
+        let indent = "  ".repeat(depth);
+        let mut result = format!("{}Node: {}\n", indent, hex::encode(&self.value));
+
+        if let Some(ref left) = self.left {
+            result.push_str(&left.debug_format(depth + 1)); // Increase depth for children
+        }
+        if let Some(ref right) = self.right {
+            result.push_str(&right.debug_format(depth + 1)); // Increase depth for children
+        }
+
+        result
+    }
+}
+
+#[derive(Clone)]
+pub struct Tree {
+    root: Option<Node>,
+}
+
+impl fmt::Debug for Tree {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        writeln!(f, "Tree:")?;
+        if let Some(ref root) = self.root {
+            writeln!(f, "{}", root.debug_format(0))?;
+        } else {
+            writeln!(f, "Empty tree")?;
+        }
+        Ok(())
+    }
+}

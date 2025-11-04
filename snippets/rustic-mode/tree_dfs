@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: tree_dfs
+# key: <tree_dfs
+# --
+
+    fn dfs(node: Option<Box<MerkleNode>>) {
+        if node.is_none() {
+            return;
+        }
+
+        // go left
+        dfs(node.as_ref().unwrap().left.clone());
+        // go right
+        dfs(node.unwrap().right.clone());
+    }
+

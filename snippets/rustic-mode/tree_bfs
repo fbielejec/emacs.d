@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: tree_bfs
+# key: <tree_bfs
+# --
+
+        fn bfs(root: Option<Box<MerkleNode>>) {
+            let mut queue = VecDeque::new();
+
+            // init queue with the root
+            if let Some(node) = root {
+                queue.push_back(node);
+            }
+
+            while !queue.is_empty() {
+                let n = queue.len();
+
+                // loop over the nodes on the same level
+                for _ in 0..n {
+                    let node = queue.pop_front().unwrap();
+                    // logic for the current node
+
+                    if let Some(left) = node.left {
+                        queue.push_back(left);
+                    }
+
+                    if let Some(right) = node.right {
+                        queue.push_back(right);
+                    }
+                }
+            }
+        }

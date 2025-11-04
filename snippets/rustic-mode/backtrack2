@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: backtrack2
+# key: <backtrack2
+# --
+
+    // DFS through all the ways to split a string into prefix and suffix
+    fn backtrack(prefixes: &mut Vec<String>, current: &[char]) {
+        // no more splits on the suffix
+        if current.is_empty() {
+            println!("{prefixes:?}");
+            return;
+        }
+
+        for split in 0..current.len() {
+            let prefix = &current[0..=split];
+            let suffix = &current[(split + 1)..current.len()];
+            prefixes.push(prefix.iter().collect());
+            // suffix becomes prefix
+            backtrack(prefixes, suffix);
+            prefixes.pop();
+        }
+    }
+
+    // initial prefix
+    let s: Vec<char> = s.chars().collect();
+    backtrack(&mut vec![], &s);

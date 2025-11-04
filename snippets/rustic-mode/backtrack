@@ -15,14 +15,14 @@
             return;
         }
 
-        // generates permutations
+        // generates permutations (ordered arrangements)
         for i in start..nums.len() {
             let num = nums[i];
             if !used.contains(&num) {
                 path.push(num);
                 used.insert(num);
 
-                // use the same (start == i) or a higher (start == i+1) start index in the recursive to skip the permutations
+                // use the same (start == i) or a higher (start == i+1) start index in the recursive to skip the permutations with or without repetitions
                 // combinations are generated in a non-decreasing order.
                 backtrack(path, start, nums, used, answer);
 
