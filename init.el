@@ -94,7 +94,7 @@
     ;; tagedit
 
     ;; git integration
-    ;; magit
+    magit
 
     ;; declare and configure packages macro
     use-package
@@ -136,11 +136,22 @@
     racer
     company
     rust-mode
+    yasnippet
+    flycheck
+    lsp-mode
+    lsp-ui
 
     treemacs
 
     gptel
 
+    ;; JS/TS
+    typescript-mode
+    tide
+    prettier-js
+    web-mode
+    emmet-mode
+    
     ))
 
 (dolist (p my-packages)
@@ -197,7 +208,7 @@
 (load "misc.el")
 
 ;; For editing lisps
-(load "elisp-editing.el")
+;;(load "elisp-editing.el")
 
 ;; For saving and restoring buffers
 ;; (load "setup-desktop.el")
@@ -205,11 +216,25 @@
 ;; Language-specific
 (load "setup-org.el")
 ;;(load "setup-clojure.el")
-;;(load "setup-js.el")
+(load "setup-js.el")
 ;;(load "setup-java.el")
-;;(load "setup-solidity.el")
+(load "setup-solidity.el")
 (load "setup-rust.el")
 ;;(load "setup-ess.el")
 (load "setup-python.el")
 ;;(load "setup-wat.el")
-(load "setup-gptel.el")
+;;(load "setup-gptel.el")
+(load "setup-go.el")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
