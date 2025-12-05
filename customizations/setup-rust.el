@@ -160,3 +160,46 @@
 ;; for Cargo.toml and other config files
 
 (use-package toml-mode :ensure)
+
+;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+;; Aider / Aidermacs
+
+(use-package aidermacs
+  :ensure t
+  :commands (aider-chat aider-open-file aider-rewrite)
+  :bind (("C-c a m" . aidermacs-transient-menu))
+  :custom
+  ;; See the Configuration section below
+  (aidermacs-default-chat-mode 'code)
+  ;; (aidermacs-default-model "openrouter/anthropic/claude-3.7-sonnet")
+  (aidermacs-default-model "sonnet")
+  :config
+  ;; Set API_KEY in .bashrc, that will automatically picked up by aider or in elisp
+  ;; (setenv "ANTHROPIC_API_KEY" "sk-...")
+
+  ;; (setq aider-model "gpt-4.1"
+  ;;       aider-editor-model "gpt-4.1-mini"
+  ;;       aider-architect t
+  ;;       aider-auto-commit nil
+  ;;       aider-include-file-tree t)
+
+  (defun aider-rust-fix ()
+    "Run cargo check and send error output to Aider."
+    (interactive)
+    (let ((buf (get-buffer-create "*Cargo Check*")))
+      (with-current-buffer buf (erase-buffer))
+      (call-process "cargo" nil buf nil "check")
+
+      (let ((errors (with-current-buffer buf (buffer-string))))
+        (aider-chat errors))))
+
+  ;; Keybindings
+  (define-key global-map (kbd "C-c a c") #'aider-chat)
+  (define-key global-map (kbd "C-c a o") #'aider-open-file)
+  (define-key global-map (kbd "C-c a r") #'aider-rewrite)
+  (define-key global-map (kbd "C-c a f") #'aider-rust-fix)
+
+  )
+
+;; for lsp-treemacs-symbols view
+(use-package lsp-treemacs :ensure)

@@ -24,8 +24,6 @@
   ;; get SSH agent in magit, don't ask for passw every time
   (exec-path-from-shell-copy-env "SSH_AGENT_PID")
   (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-  ;; for deepseek API key from .secrets file
-  (exec-path-from-shell-copy-env "DEEPSEEK_API_KEY")
 
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-copy-envs '("PATH")))

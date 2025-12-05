@@ -4,12 +4,14 @@
 # --
 
 let kadanes = |a: Vec<i32>| -> i32 {
-    let mut global = a[0];
-    let mut current = a[0];
+    // sum of subarray with the largest sum ending at i
+    let mut current = 0;
+    // subarray with the largest sum anywhere between 0 and i    
+    let mut global = 0;    
 
-    for elem in a.iter().skip(1) {
-        // largest sum subarray from the ones ending at i
-        current = max(*elem, elem + current);
+    for elem in a.iter() {
+        // extedn this array or start a new subarray
+        current = max(elem + current, 0);
 
         // largest sum subaray from 0 to i
         global = max(current, global);

@@ -3,11 +3,6 @@
 ;; ------------------------------
 
 ;; Major modes
-;; (use-package typescript-mode
-;;   :mode "\\.ts\\'"
-;;   :hook ((typescript-mode . my/ts-setup))
-;;   :config
-;;   (setq typescript-indent-level 2))
 (use-package typescript-mode
   :ensure t
   :mode ("\\.ts\\'" "\\.tsx\\'")
@@ -16,34 +11,7 @@
   :config
   (setq typescript-indent-level 2))
 
-;; (use-package tsx-mode
-;;   :mode "\\.tsx\\'"
-;;   :hook ((tsx-mode . my/ts-setup)))
-
-;; (use-package js-mode
-;;   :ensure nil ;; built-in
-;;   :mode "\\.jsx?\\'"
-;;   :hook ((js-mode . my/ts-setup)))
-
-;; Web mode for TSX/JSX files
-;; (use-package web-mode
-;;   :ensure t
-;;   :mode ("\\.tsx\\'" "\\.jsx\\'")
-;;   :hook ((web-mode . setup-web-mode-for-typescript))
-;;   :config
-;;   (setq web-mode-markup-indent-offset 2
-;;         web-mode-css-indent-offset 2
-;;         web-mode-code-indent-offset 2
-;;         web-mode-content-types-alist '(("jsx" . "\\.tsx\\'"))))
-
-
 ;; LSP
-;; (use-package lsp-mode
-;;   :commands lsp
-;;   :config
-;;   (setq lsp-headerline-breadcrumb-enable nil
-;;         lsp-prefer-capf t
-;;         lsp-eslint-auto-fix-on-save t))
 (use-package lsp-mode
   :ensure t
   :commands lsp
@@ -86,11 +54,6 @@
 
 
 ;; Company (auto-completion)
-;; (use-package company
-;;   :commands company-mode
-;;   :config
-;;   (setq company-idle-delay 0
-;;         company-minimum-prefix-length 1))
 (use-package company
   :ensure t
   :defer t
@@ -127,19 +90,15 @@
   :ensure t
   :defer t)
 
-;; ------------------------------
-;; PRETTIER SUPPORT
-;; ------------------------------
-;; (use-package prettier
-;;   :hook ((typescript-mode . prettier-mode)
-;;          (tsx-mode . prettier-mode)
-;;          (js-mode . prettier-mode))
-;;   :config
-;;   ;; Don't format twice (LSP + Prettier)
-;;   (setq prettier-mode-sync-config-flag nil))
-
-;; ;; If user wants prettier via npx:
-;; (setq prettier-pre-warm 't)
+;; jest-test-run-at-point	C-c C-c	Runs only the test under cursor
+;; jest-test-run-file	C-c C-f	Runs only the current file
+;; jest-test-run	C-c C-t	Runs the whole suite
+(use-package jest-test-mode
+  :ensure t
+  :hook (typescript-mode . jest-test-mode)
+  :hook (tsx-mode . jest-test-mode)
+  ;; :hook (js-mode . jest-test-mode)
+  )
 
 ;; Prettier for code formatting
 (use-package prettier-js
@@ -172,39 +131,113 @@
     :mode "\\.ts\\'"
     :hook ((typescript-ts-mode . my/ts-setup)))
 
-  (use-package js-ts-mode
-    :ensure t
-    :defer t
-    :mode "\\.jsx?\\'"
-    :hook ((js-ts-mode . my/ts-setup))))
+  ;; (use-package js-ts-mode
+  ;;   :ensure t
+  ;;   :defer t
+  ;;   :mode "\\.jsx?\\'"
+  ;;   :hook ((js-ts-mode . my/ts-setup)))
 
+  )
 
-;; ------------------------------
-;; MASTER HOOK: LOCAL SETUP
-;; ------------------------------
-;; (defun my/ts-setup ()
-;;   "Setup everything for TS/JS buffers only."
+;; -----
+;; REPL
+;; -----
 
-;;   ;; Modes
-;;   (lsp)
-;;   (company-mode 1)
-;;   (yas-minor-mode 1)
-;;   (flycheck-mode 1)
-;;   (enable-paredit-mode)
+(require 'project)
 
-;;   ;; TAB = completion
-;;   (setq-local tab-always-indent 'complete)
+(defun ts/project-root ()
+  "Return the project root using project.el."
+  (or (project-root (project-current))
+      default-directory))
 
-;;   ;; Cleanup on save
-;;   (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)
+(defun ts/repl-buffer ()
+  (get-buffer "*ts-repl*"))
 
-;;   ;; Auto-fix ESLint before save (requires lsp-eslint)
-;;   (add-hook 'before-save-hook #'lsp-eslint-apply-all-fixes nil t)
+;; M-x ts/run-repl
+;; needs `npm install -g ts-node`
+(defun ts/run-repl ()
+  "Start or switch to a TypeScript REPL at the project root."
+  (interactive)
+  (if (ts/repl-buffer)
+      (pop-to-buffer "*ts-repl*")
+    (let* ((default-directory (ts/project-root)))
+      (make-comint "ts-repl" "ts-node" nil "--transpile-only")
+      (pop-to-buffer "*ts-repl*"))))
 
-;;   ;; Format with LSP unless Prettier is in use
-;;   (unless (bound-and-true-p prettier-mode)
-;;     (add-hook 'before-save-hook #'lsp-format-buffer nil t)))
-;; Setup functions
+(defun ts/repl-restart ()
+  "Kill the ts-repl buffer and start a fresh one."
+  (interactive)
+  (when (get-buffer "*ts-repl*")
+    (kill-buffer "*ts-repl*"))
+  (ts/run-repl))
+
+(defun ts/repl-soft-reset ()
+  "Clear most globals in the TypeScript REPL (soft reset)."
+  (interactive)
+  (comint-send-string
+   "*ts-repl*"
+   "Object.keys(global).forEach(k => { if (!k.startsWith('_')) delete global[k]; });\n"))
+
+;; autocomplete inside REPL (company mode)
+;; history cycling with M-p / M-n
+(add-hook 'comint-mode-hook #'company-mode)
+
+(setq comint-move-point-for-output t
+      comint-scroll-to-bottom-on-input t
+      comint-scroll-to-bottom-on-output t)
+
+;; C-c C-r
+(defun ts/send-region (start end)
+  (interactive "r")
+  (comint-send-string "*ts-repl*" (concat (buffer-substring-no-properties start end) "\n")))
+
+;; C-c C-l
+(defun ts/send-line ()
+  (interactive)
+  (ts/send-region (line-beginning-position) (line-end-position)))
+
+;; C-c C-e
+(defun ts/send-expression ()
+  (interactive)
+  (let ((expr (thing-at-point 'sexp t)))
+    (comint-send-string "*ts-repl*" (concat expr "\n"))))
+
+;; Load entire file: C-c C-k
+(defun ts/load-file ()
+  (interactive)
+  (when buffer-file-name
+    (comint-send-string "*ts-repl*"
+                        (format "import('%s')\n" (file-relative-name buffer-file-name (ts/project-root))))))
+
+;; back and forth between code and REPL: C-c C-z
+(defun ts/switch-to-repl ()
+  (interactive)
+  (pop-to-buffer (ts/repl-buffer)))
+
+(local-set-key (kbd "C-c C-z") #'ts/switch-to-repl)
+
+;; minor mode for TS buffers / REPL
+(define-minor-mode ts-cider-mode
+  "Minor mode for CIDER/SLIME-like TypeScript development."
+  :lighter " tsREPL"
+  :keymap (let ((map (make-sparse-keymap)))
+            ;; CIDER-style bindings
+            (define-key map (kbd "C-c C-z") #'ts/run-repl)
+            (define-key map (kbd "C-c C-e") #'ts/send-expression)
+            (define-key map (kbd "C-c C-r") #'ts/send-region)
+            (define-key map (kbd "C-c C-l") #'ts/send-line)
+            (define-key map (kbd "C-c C-b") #'ts/send-buffer)
+            (define-key map (kbd "C-c C-k") #'ts/load-file)
+            map))
+
+(add-hook 'typescript-mode-hook #'ts-cider-mode)
+(add-hook 'tsx-mode-hook #'ts-cider-mode)
+(add-hook 'js-mode-hook #'ts-cider-mode)
+
+;; ------------
+;; MASTER HOOK
+;; ------------
+
 (defun setup-typescript-mode ()
   "Setup TypeScript development environment."
   ;; Enable completion and snippets
@@ -247,14 +280,3 @@
   (local-set-key (kbd "M-,") 'lsp-find-references)
   (local-set-key (kbd "C-c C-l") 'lsp-ui-imenu)
   )
-
-;; JavaScript mode setup
-;; (use-package js2-mode
-;;   :ensure t
-;;   :mode ("\\.js\\'")
-;;   :hook (js2-mode . setup-typescript-mode))
-
-;; (use-package js-mode
-;;   :ensure t
-;;   :mode ("\\.js\\'")
-;;   :hook (js-mode . setup-typescript-mode))

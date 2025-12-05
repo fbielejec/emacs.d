@@ -1,0 +1,64 @@
+# -*- mode: snippet -*-
+# name: graph_bfs
+# key: <graph_bfs
+# --
+
+  type Node = [number, number];
+
+  const nrows = image.length;
+  const ncols = image[0].length;
+
+  function inBounds(row: number, col: number): boolean {
+    return 0 <= row && row < nrows &&
+      0 <= col && col < ncols;
+  }
+
+  function getNeighbours(node: Node): Node[] {
+    let [row, col] = node;
+    const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+
+    let neighbours: Node[] = [];
+    for (let i = 0; i < directions.length; i++) {
+      let neighbour_row = row + directions[i][0];
+      let neighbour_col = col + directions[i][1];
+
+      if (inBounds(neighbour_row, neighbour_col) &&
+        (image[neighbour_row][neighbour_col] === originalColor)) {
+        neighbours.push([neighbour_row, neighbour_col]);
+      }
+    }
+
+    return neighbours;
+  }
+
+  let queue: [number, number][] = [];
+  let visited = new Set<Node>();
+
+  let root: Node = [sr, sc]
+  queue.push(root);
+  visited.add(root)
+
+  while (queue.length > 0) {
+    // pop front
+    let node: Node = queue.shift()!;
+
+    // logic if neccessary
+
+    // get all the neighbours of this node
+    for (let neighbour of getNeighbours(node)) {
+
+      // if not visited yet
+      if (!visited.has(neighbour)) {
+
+      // logic if neccessary
+
+        // push back
+        queue.push(neighbour);
+        // mark as visited
+        visited.add(neighbour);
+      }
+
+    }
+
+  }
+

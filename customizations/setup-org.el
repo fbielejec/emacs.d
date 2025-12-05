@@ -8,7 +8,8 @@
         org-agenda-files '("~/CloudStation/scrapbook.org"
                            "~/CloudStation/Cryptography_101/zero_knowledge_proofs/"
                            "~/CloudStation/Computing_101/leet/"
-                           "~/CloudStation/Cryptography_101/zkSNARKs-notes/")
+                           "~/CloudStation/Cryptography_101/zkSNARKs-notes/"
+                           )
         ;; org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
         org-plantuml-jar-path (expand-file-name "/home/filip/Programs/plantuml-nodot.1.2023.7.jar"))
 
