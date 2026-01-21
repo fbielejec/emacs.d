@@ -6,9 +6,7 @@
         org-confirm-babel-evaluate nil
         org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "IN-REVIEW" "|" "DONE"))
         org-agenda-files '("~/CloudStation/scrapbook.org"
-                           "~/CloudStation/Cryptography_101/zero_knowledge_proofs/"
-                           "~/CloudStation/Computing_101/leet/"
-                           "~/CloudStation/Cryptography_101/zkSNARKs-notes/"
+                           "~/CloudStation/universal/universal_README.org"
                            )
         ;; org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
         org-plantuml-jar-path (expand-file-name "/home/filip/Programs/plantuml-nodot.1.2023.7.jar"))
@@ -82,6 +80,24 @@
 
 (use-package org-roam
   :ensure t)
+
+;; mermaid diagrams
+(use-package mermaid-mode
+  :ensure t)
+;; CLI: npm install -g @mermaid-js/mermaid-cli
+(use-package ob-mermaid
+  :ensure t
+  :config
+  (setq ob-mermaid-cli-path "/home/filip/.nvm/versions/node/v23.9.0/bin/mmdc")
+
+  (setq ob-mermaid-cli-path "mmdc")
+  ;; -s 3 - scale factor 3x (higher resolution)
+  ;; -w 2400 - width in pixels
+  ;; -H 1800 - height in pixels
+  ;; -b transparent - transparent background
+  (setq ob-mermaid-extra-args '("-s" "3" "-w" "2400" "-H" "1800"))
+
+  )
 
 ;; Automatically inserts tables of contents
 (use-package org-make-toc
