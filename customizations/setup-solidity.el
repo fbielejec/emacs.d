@@ -1,116 +1,108 @@
-;; V3
+;; V4 - Improved Solidity Configuration
 
-;; --- Prerequisite for LSP
-;; npm install -g solidity-language-server solium
-;; solc
-;; https://github.com/ethereum/solc-bin/blob/gh-pages/linux-amd64/solc-linux-amd64-v0.8.26%2Bcommit.8a97fa7a
-;; sudo ln -s -f /home/filip/Programs/solc-linux-amd64 /usr/local/bin/solc
+;; --- Prerequisites for LSP ---
+;; npm install -g @nomicfoundation/solidity-language-server
+;; Install solc: https://docs.soliditylang.org/en/latest/installing-solidity.html
 
-;; Enable Solidity mode for .sol files
-(require 'solidity-mode)
-(add-to-list 'auto-mode-alist '("\\.sol$" . solidity-mode))
+;; Configuration variables
+(defcustom solidity-node-path "~/.nvm/versions/node/v23.9.0/bin"
+  "Path to Node.js binaries."
+  :type 'string
+  :group 'solidity)
 
-;; Company mode configuration
-(require 'company)
-(require 'company-solidity)
-;; (add-hook 'after-init-hook 'global-company-mode)
+(defcustom solidity-solc-path "/home/filip/.cargo/bin/solc"
+  "Path to solc compiler."
+  :type 'string
+  :group 'solidity)
 
-;; Paredit mode configuration
-(require 'paredit)
-(add-hook 'solidity-mode-hook 'paredit-mode)
+;; Ensure required packages are available
+(defun solidity-check-dependencies ()
+  "Check if required Solidity tools are available."
+  (unless (executable-find "solc")
+    (message "Warning: solc not found in PATH"))
+  (unless (file-exists-p (expand-file-name "nomicfoundation-solidity-language-server" solidity-node-path))
+    (message "Warning: solidity-language-server not found")))
 
-;; Whitespace cleanup on save
-;; (require 'whitespace)
-;; (setq whitespace-style '(face trailing tabs spaces))
+;; Core Solidity mode setup
+(use-package solidity-mode
+  :mode "\\.sol\\'"
+  :hook ((solidity-mode . solidity-mode-setup)
+         (solidity-mode . flycheck-mode)
+         (solidity-mode . lsp-deferred))
+  :config
+  (solidity-check-dependencies))
 
-;; LSP mode configuration
-(require 'lsp-mode)
-(add-hook 'solidity-mode-hook #'lsp)
+;; Company completion
+(use-package company-solidity
+  :after (company solidity-mode)
+  :config
+  (add-to-list 'company-backends 'company-solidity))
 
-;; LSP UI for better user interface
-(require 'lsp-ui)
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+;; LSP configuration
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :custom
+  ;; (lsp-solidity-server-command `(,(expand-file-name "vscode-solidity-server" solidity-node-path) "--stdio"))
+  ;; (lsp-solidity-server-command `(,(expand-file-name "solidity-language-server" solidity-node-path) "--stdio"))
+  (lsp-solidity-server-command `(,(expand-file-name "nomicfoundation-solidity-language-server" solidity-node-path) "--stdio"))
+  :config
+  (add-to-list 'exec-path solidity-node-path))
 
-;; Local variables
-(defun my-solidity-mode-setup ()
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-sideline-enable t))
+
+;; Flycheck for syntax checking
+(use-package flycheck
+  :custom
+  (flycheck-check-syntax-automatically '(save mode-enabled)))
+
+(use-package solidity-flycheck
+  :after (solidity-mode flycheck)
+  :config
+  (setq solidity-flycheck-solc-checker-active t
+        solidity-flycheck-chaining-error-level t
+        solidity-flycheck-use-project t))
+
+;; Custom setup function
+(defun solidity-mode-setup ()
   "Custom configurations for Solidity mode."
-  (setq-local company-backends '((company-dabbrev-code)))
-  ;; (setq-local flycheck-solidity-solium-soliumrcfile "/home/filip/.soliumrc.json") ; Update this path if you have a solium config file
+  ;; Disable inlay hints (not supported by solidity-language-server)
+  (setq-local lsp-inlay-hint-enable nil)
+
+  ;; Company backends
+  (setq-local company-backends '((company-solidity company-dabbrev-code)))
+
+  ;; Flycheck settings
   (setq-local flycheck-solidity-solc-addstd-contracts t)
 
-  ;; @filip experimental
-  ;; (setq solidity-flycheck-solium-checker-active nil)
-  (setq solidity-flycheck-solc-checker-active t)
-  (setq solidity-flycheck-chaining-error-level t)
-  (setq solidity-flycheck-use-project t)
-  ;; (setq solidity-flycheck-solc-additional-allow-paths '("/home/filip/CloudStation/aleph/my-lz-oapp/node_modules/"))
+  ;; Compiler paths
+  (setq solidity-solc-path solidity-solc-path)
 
-  ;; to find npm
-  (setq exec-path (append exec-path '("~/.nvm/versions/node/v23.10.0/bin")))
-  ;; (setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solcjs")
-  (setq solidity-solc-path "/home/filip/.cargo/bin/solc")
-  (setq solidity-solium-path "/home/filip/.nvm/versions/node/v23.10.0/bin/solium")
-
-  ;; Whitespace cleanup on save
-  (setq whitespace-style '(face trailing tabs spaces))
+  ;; Whitespace cleanup
+  (setq-local whitespace-style '(face trailing tabs spaces))
   (add-hook 'before-save-hook 'whitespace-cleanup nil t)
 
-  ;; (define-key solidity-mode-map (kbd "C-c C-g") 'solidity-estimate-gas-at-point)
+  ;; Optional: Paredit for structured editing
+  (when (fboundp 'paredit-mode)
+    (paredit-mode 1)))
 
-  )
+;; Disable inlay hints after LSP starts for solidity buffers
+(add-hook 'lsp-after-open-hook
+          (lambda ()
+            (when (derived-mode-p 'solidity-mode)
+              (lsp-inlay-hints-mode -1))))
 
-(require 'solidity-flycheck) ;; TMP: https://github.com/ethereum/emacs-solidity/issues/41#issuecomment-508982585
-(add-hook 'solidity-mode-hook 'my-solidity-mode-setup)
+;; Project-specific working directory for flycheck
+(defun solidity-flycheck-working-directory ()
+  "Find project root for Solidity flycheck."
+  (or ;;(locate-dominating-file buffer-file-name "hardhat.config.ts")
+      ;;(locate-dominating-file buffer-file-name "hardhat.config.js")
+      (locate-dominating-file buffer-file-name "foundry.toml")
+      (locate-dominating-file buffer-file-name "package.json")
+      default-directory))
 
-;; Flycheck configuration for Solidity
-(require 'flycheck)
-(add-hook 'solidity-mode-hook 'flycheck-mode)
+(provide 'setup-solidity)
 
-
-;; (use-package solidity-flycheck
-;;   :defer t
-;;   :init
-
-;;   (setq-local company-backends '((company-dabbrev-code)))
-;;   ;; (setq-local flycheck-solidity-solium-soliumrcfile "/home/filip/.soliumrc.json") ; Update this path if you have a solium config file
-;;   (setq-local flycheck-solidity-solc-addstd-contracts t)
-
-;;   ;; @filip experimental
-;;   ;; (setq solidity-flycheck-solium-checker-active nil)
-;;   (setq solidity-flycheck-solc-checker-active t)
-;;   (setq solidity-flycheck-chaining-error-level t)
-;;   (setq solidity-flycheck-use-project t)
-;;   ;; (setq solidity-flycheck-solc-additional-allow-paths '("/home/filip/CloudStation/aleph/my-lz-oapp/node_modules/"))
-
-;;   ;; to find npm
-;;   (setq exec-path (append exec-path '("~/.nvm/versions/node/v18.19.0/bin")))
-;;   ;; (setq solidity-solc-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solcjs")
-;;   (setq solidity-solc-path "/usr/local/bin/solc")
-;;   (setq solidity-solium-path "/home/filip/.nvm/versions/node/v18.19.0/bin/solium")
-
-;;   (add-hook
-;;    'solidity-mode-hook
-;;    (lambda ()
-;;      (require 'solidity-flycheck))))
-
-;; Whitespace cleanup on save
-;; (setq whitespace-style '(face trailing tabs spaces))
-;; (add-hook 'before-save-hook 'whitespace-cleanup nil t)
-
-;; Additional configurations (optional)
-;; (setq company-idle-delay 0.2)
-;; (setq company-minimum-prefix-length 1)
-(setq flycheck-check-syntax-automatically '(save mode-enabled))
-
-;; Optional: LSP related settings
-;; (setq lsp-enable-snippet t)
-;; (setq lsp-enable-symbol-highlighting t)
-;; (setq lsp-ui-doc-enable t)
-;; (setq lsp-ui-imenu-enable t)
-;; (setq lsp-ui-sideline-enable t)
-;; (setq lsp-ui-flycheck-enable t)
-
-;; (provide 'init-solidity)
-
-;; (defun solidity-flycheck-working-directory ()
-;;   (locate-dominating-file buffer-file-name "hardhat.config.ts"))
