@@ -4,6 +4,18 @@
 ;; npm install -g @nomicfoundation/solidity-language-server
 ;; Install solc: https://docs.soliditylang.org/en/latest/installing-solidity.html
 
+;; Ensure Foundry projects are recognized by projectile
+;; This is critical for LSP to find the correct project root and remappings.txt
+(with-eval-after-load 'projectile
+  ;; Add to bottom-up search (finds closest match to file)
+  (add-to-list 'projectile-project-root-files-bottom-up "foundry.toml")
+  (add-to-list 'projectile-project-root-files-bottom-up "hardhat.config.js")
+  (add-to-list 'projectile-project-root-files-bottom-up "hardhat.config.ts")
+  ;; Also add to top-down search as backup
+  (add-to-list 'projectile-project-root-files "foundry.toml")
+  (add-to-list 'projectile-project-root-files "hardhat.config.js")
+  (add-to-list 'projectile-project-root-files "hardhat.config.ts"))
+
 ;; Configuration variables
 (defcustom solidity-node-path "~/.nvm/versions/node/v23.9.0/bin"
   "Path to Node.js binaries."
@@ -41,12 +53,40 @@
 ;; LSP configuration
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :custom
-  ;; (lsp-solidity-server-command `(,(expand-file-name "vscode-solidity-server" solidity-node-path) "--stdio"))
-  ;; (lsp-solidity-server-command `(,(expand-file-name "solidity-language-server" solidity-node-path) "--stdio"))
-  (lsp-solidity-server-command `(,(expand-file-name "nomicfoundation-solidity-language-server" solidity-node-path) "--stdio"))
   :config
-  (add-to-list 'exec-path solidity-node-path))
+  (add-to-list 'exec-path solidity-node-path)
+
+  ;; Custom Solidity LSP client with proper initialization (matching VSCode)
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection
+                     (lambda ()
+                       (list (expand-file-name "nomicfoundation-solidity-language-server"
+                                               solidity-node-path)
+                             "--stdio")))
+    :activation-fn (lsp-activate-on "solidity")
+    :server-id 'solidity-ls
+    :priority 1  ;; Higher priority than default solidity client
+    :initialization-options
+    (lambda ()
+      `(:extensionName "solidity"
+        :extensionVersion "1.0.0"
+        :env "production"
+        :telemetryEnabled :json-false
+        :machineId ,(md5 (system-name))
+        :extensionConfig (:formatter "forge")))
+    ;; Watch for project config file changes
+    :initialized-fn
+    (lambda (workspace)
+      (with-lsp-workspace workspace
+        (lsp--set-configuration
+         `(:solidity (:formatter "forge"))))
+      ;; Register file watchers for project files
+      (lsp-notify
+       "workspace/didChangeWatchedFiles"
+       `(:changes [])))
+    :notification-handlers
+    (ht ("custom/validation-job-status" #'ignore)))))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -94,6 +134,13 @@
           (lambda ()
             (when (derived-mode-p 'solidity-mode)
               (lsp-inlay-hints-mode -1))))
+
+;; Enable file watching for Solidity projects (required for import resolution)
+(setq lsp-enable-file-watchers t)
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.git\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]node_modules\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]out\\'")
+(add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]cache\\'")
 
 ;; Project-specific working directory for flycheck
 (defun solidity-flycheck-working-directory ()

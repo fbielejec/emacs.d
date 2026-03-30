@@ -97,6 +97,14 @@
     :ensure t
     :hook (python-mode . aggressive-indent-mode)))
 
+;; Configure Jupyter REPL
+(use-package jupyter
+  :ensure t
+  :config
+  ;; Change REPL history keybindings from M-n/M-p to M-<up>/M-<down>
+  (define-key jupyter-repl-mode-map (kbd "M-<up>") 'jupyter-repl-history-previous)
+  (define-key jupyter-repl-mode-map (kbd "M-<down>") 'jupyter-repl-history-next))
+
 ;; experimental: evaluating tree sitter major mode
 ;; (setq major-mode-remap-alist
 ;;       '(
