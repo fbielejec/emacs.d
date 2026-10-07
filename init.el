@@ -145,6 +145,8 @@
 
     gptel
 
+    uuid
+
     ;; JS/TS
     typescript-mode
     tide

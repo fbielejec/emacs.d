@@ -53,3 +53,17 @@ a link you can paste in the browser."
 
 (add-hook 'org-mode-hook (lambda() (company-mode 0)))
 (add-hook 'magit-mode-hook (lambda() (company-mode 0)))
+
+(defun insert-uuid ()
+  "Insert an uppercase UUID at point."
+  (interactive)
+  (require 'uuid)
+  (insert (upcase (uuid-string))))
+
+(defun emacs-recompile ()
+  "Recompile all .elc files."
+  (interactive)
+  (message "Recompiling ...")
+  (if (functionp 'async-byte-recompile-directory)
+      (async-byte-recompile-directory package-user-dir)
+    (byte-recompile-directory package-user-dir 0 'force)))

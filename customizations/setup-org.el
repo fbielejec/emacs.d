@@ -74,6 +74,33 @@
   (when (require 'org-make-toc nil 'noerror)
     (add-hook 'before-save-hook #'org-make-toc-mode nil 'local)))
 
+;; Accordion folding: opening a heading with TAB folds its siblings.
+;; Opt-in per file, first line: # -*- filip/org-accordion-enabled: t -*-
+(defvar-local filip/org-accordion-enabled nil
+  "When non-nil, opening a heading with TAB folds its siblings.")
+(put 'filip/org-accordion-enabled 'safe-local-variable #'booleanp)
+
+(defun filip/org-accordion (state)
+  "When a heading is opened with TAB, fold its siblings first."
+  (when (and filip/org-accordion-enabled
+             (memq state '(children subtree)))
+    (let ((pos (point)))
+      (save-excursion
+        (if (org-up-heading-safe)
+            ;; Fold the parent, then show only the parent's child headings
+            (progn (org-fold-hide-subtree)
+                   (org-fold-show-children))
+          ;; Top-level heading: fold everything back to the top-level overview
+          (org-overview)))
+      ;; Open the current heading again in the state TAB asked for
+      (goto-char pos)
+      (if (eq state 'subtree)
+          (org-fold-show-subtree)
+        (org-fold-show-entry)
+        (org-fold-show-children)))))
+
+(add-hook 'org-cycle-hook #'filip/org-accordion)
+
 ;; Optional tools
 (use-package anki-editor
   :ensure t)
